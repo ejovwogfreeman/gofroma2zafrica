@@ -3,14 +3,14 @@ import RootLayoutClient from "./RootLayoutClient";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AfricGo",
+  title: "GoFromA2zAfrica",
   description: "Your Premier African Marketplace",
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">

@@ -18,7 +18,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            Fast & Reliable Delivery Services
+            Seamless Access To Every Market In Africa - Just Make The Click
           </motion.h1>
 
           {/* Subtitle */}

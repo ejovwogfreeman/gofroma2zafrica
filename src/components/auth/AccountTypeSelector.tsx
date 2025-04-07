@@ -79,7 +79,7 @@ function AccountTypeCard({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className="bg-dark-primary/50 border-gold-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10
+      className="bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-gold-primary/50
         hover:border-gold-primary/100 transition-all text-left"
     >
       <h3 className="text-xl font-semibold text-gold-primary mb-2">{title}</h3>

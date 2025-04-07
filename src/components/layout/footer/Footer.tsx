@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import FooterNav from "./FooterNav"
-import FooterNewsletter from "./FooterNewsletter"
-import FooterSocial from "./FooterSocial"
-import Logo from "@/components/ui/logo"
+import { motion } from "framer-motion";
+import FooterNav from "./FooterNav";
+import FooterNewsletter from "./FooterNewsletter";
+import FooterSocial from "./FooterSocial";
+import Logo from "@/components/ui/logo";
 
 export default function Footer() {
   return (
@@ -21,14 +21,15 @@ export default function Footer() {
           <div className="space-y-6">
             <Logo />
             <p className="text-text-secondary text-sm max-w-xs">
-              Empowering African businesses with cutting-edge solutions and global connectivity.
+              Empowering African businesses with cutting-edge solutions and
+              global connectivity.
             </p>
             <FooterSocial />
           </div>
 
           {/* Navigation Sections */}
-          <FooterNav 
-            title="Company" 
+          <FooterNav
+            title="Company"
             links={[
               { name: "About Us", href: "/about" },
               { name: "Careers", href: "/careers" },
@@ -37,8 +38,8 @@ export default function Footer() {
             ]}
           />
 
-          <FooterNav 
-            title="Resources" 
+          <FooterNav
+            title="Resources"
             links={[
               { name: "Documentation", href: "/docs" },
               { name: "Help Center", href: "/help" },
@@ -55,10 +56,11 @@ export default function Footer() {
         <div className="mt-16 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-text-secondary text-sm">
-              © {new Date().getFullYear()} AfricGo. All rights reserved.
+              © {new Date().getFullYear()} Alpha Interactive Tech Hub Nigeria.
+              All rights reserved.
             </p>
             <div className="flex items-center space-x-4">
-              <motion.a 
+              <motion.a
                 href="#"
                 className="text-text-secondary hover:text-white text-sm transition-colors"
                 whileHover={{ scale: 1.05 }}
@@ -66,7 +68,7 @@ export default function Footer() {
               >
                 Privacy Policy
               </motion.a>
-              <motion.a 
+              <motion.a
                 href="#"
                 className="text-text-secondary hover:text-white text-sm transition-colors"
                 whileHover={{ scale: 1.05 }}
@@ -85,5 +87,5 @@ export default function Footer() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-primary/20 to-transparent animate-pulse" />
       </div>
     </footer>
-  )
+  );
 }

@@ -12,6 +12,8 @@ const navItems = [
   { name: "Features", href: "#features" },
   { name: "How It Works", href: "#how-it-works" },
   { name: "Success Stories", href: "#success-stories" },
+  { name: "Stores", href: "stores" },
+  { name: "Track Order", href: "track" },
 ];
 
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
