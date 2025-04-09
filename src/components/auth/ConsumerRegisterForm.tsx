@@ -103,7 +103,7 @@ export default function ConsumerRegisterForm() {
       className="max-w-xl mx-auto"
     >
       <div className="text-center mb-12">
-        <h1 className="text-display-small font-bold hero-gradient-text mb-4">
+        <h1 className="text-4xl lg:text-5xl font-bold hero-gradient-text mb-4">
           Create Consumer Account
         </h1>
         <p className="text-text-secondary text-lg">
