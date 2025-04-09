@@ -99,7 +99,7 @@ export default function RegisterForm() {
     >
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-display-small font-bold hero-gradient-text mb-4">
+        <h1 className="text-4xl lg:text-5xl font-bold hero-gradient-text mb-4">
           Join GoFromA2zAfrica
         </h1>
         <p className="text-text-secondary text-lg">
