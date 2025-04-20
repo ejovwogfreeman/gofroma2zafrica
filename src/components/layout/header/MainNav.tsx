@@ -30,6 +30,10 @@ const MainNav: React.FC<MainNavProps> = ({ className }) => {
       href: isHomePage ? "#success-stories" : "/#success-stories",
     },
     {
+      name: "About Us",
+      href: isHomePage ? "#about-us" : "/#about-us",
+    },
+    {
       name: "Stores",
       href: "/stores", // External links remain unchanged
     },

@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { motion } from "framer-motion"
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface FooterNavProps {
-  title: string
+  title: string;
   links: {
-    name: string
-    href: string
-  }[]
+    name: string;
+    href: string;
+  }[];
 }
 
 export default function FooterNav({ title, links }: FooterNavProps) {
   return (
-    <div className="space-y-6">
+    <div>
       <h3 className="text-white font-medium">{title}</h3>
       <ul className="space-y-4">
         {links.map((link) => (
           <li key={link.href}>
             <Link href={link.href}>
               <motion.span
-                className="text-text-secondary hover:text-white text-sm relative group inline-block"
+                className="text-text-secondary hover:text-gold-primary text-sm relative group inline-block"
                 whileHover={{ x: 6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
@@ -32,5 +32,5 @@ export default function FooterNav({ title, links }: FooterNavProps) {
         ))}
       </ul>
     </div>
-  )
+  );
 }

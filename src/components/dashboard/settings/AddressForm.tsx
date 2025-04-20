@@ -48,7 +48,8 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
-      <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-gradient-to-b from-white to-gold-50/30 rounded-xl shadow-2xl border border-gold-200">
+      {/* <form onSubmit={handleSubmit} className="w-full max-w-2xl bg-gradient-to-b from-white to-gold-50/30 rounded-xl shadow-2xl border border-gold-200"> */}
+      <form onSubmit={handleSubmit} className='bg-white'>
         {/* Header */}
         <div className="bg-gradient-to-r from-gold-800 to-gold-600 rounded-t-xl px-6 py-5 flex justify-between items-center border-b border-gold-500">
           <h2 className="text-xl font-semibold text-white tracking-wide">
@@ -57,7 +58,7 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
           <button
             type="button"
             onClick={onClose}
-            className="text-white/90 hover:text-white transition-colors hover:bg-gold-700/50 p-1.5 rounded-lg"
+            className="hover:text-gold-primary transition-colors hover:bg-gold-700/50 p-1.5 rounded-lg"
           >
             <XMarkIcon className="h-6 w-6" />
           </button>
@@ -75,7 +76,7 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
               id="label"
               value={formData.label}
               onChange={(e) => setFormData(prev => ({ ...prev, label: e.target.value }))}
-              className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200"
+              className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200 outline-none py-1 px-2"
               required
             />
           </div>
@@ -90,7 +91,7 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
               id="street"
               value={formData.street}
               onChange={(e) => setFormData(prev => ({ ...prev, street: e.target.value }))}
-              className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200"
+              className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200 outline-none py-1 px-2"
               required
             />
           </div>
@@ -102,11 +103,12 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
                 City
               </label>
               <input
+
                 type="text"
                 id="city"
                 value={formData.city}
                 onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
-                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200"
+                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200 outline-none py-1 px-2"
                 required
               />
             </div>
@@ -115,11 +117,12 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
                 State
               </label>
               <input
+
                 type="text"
                 id="state"
                 value={formData.state}
                 onChange={(e) => setFormData(prev => ({ ...prev, state: e.target.value }))}
-                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200"
+                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200 outline-none py-1 px-2"
                 required
               />
             </div>
@@ -132,11 +135,12 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
                 Country
               </label>
               <input
+
                 type="text"
                 id="country"
                 value={formData.country}
                 onChange={(e) => setFormData(prev => ({ ...prev, country: e.target.value }))}
-                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200"
+                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200 outline-none py-1 px-2"
                 required
               />
             </div>
@@ -145,11 +149,12 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
                 Postal Code
               </label>
               <input
+
                 type="text"
                 id="postalCode"
                 value={formData.postalCode}
                 onChange={(e) => setFormData(prev => ({ ...prev, postalCode: e.target.value }))}
-                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200"
+                className="block w-full rounded-md border-gold-300 bg-white/90 shadow-sm focus:border-gold-500 focus:ring-gold-500 transition-all duration-200 outline-none py-1 px-2"
                 required
               />
             </div>
@@ -162,7 +167,7 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
               id="isDefault"
               checked={formData.isDefault}
               onChange={(e) => setFormData(prev => ({ ...prev, isDefault: e.target.checked }))}
-              className="h-5 w-5 text-gold-600 focus:ring-gold-500 border-gold-300 rounded transition-all duration-200"
+              className="h-5 w-5 text-gold-600 focus:ring-gold-500 border-gold-300 rounded transition-all duration-200 outline-none py-1 px-2"
             />
             <label htmlFor="isDefault" className="ml-3 text-sm font-medium text-gold-900">
               Set as default address
@@ -178,7 +183,7 @@ export default function AddressForm({ existingAddress, onClose }: AddressFormPro
             className={`w-full flex justify-center py-3.5 px-4 rounded-lg text-sm font-medium transition-all duration-300
               ${isSubmitting 
                 ? 'bg-gray-400 cursor-not-allowed' 
-                : 'bg-gradient-to-r from-gold-800 to-gold-600 hover:from-gold-900 hover:to-gold-700 text-white shadow-lg hover:shadow-xl active:scale-[0.99]'
+                : 'bg-white border hover:from-gold-900 hover:to-gold-700 text-dark shadow-lg hover:shadow-xl active:scale-[0.99]'
               }`}
           >
             {isSubmitting 

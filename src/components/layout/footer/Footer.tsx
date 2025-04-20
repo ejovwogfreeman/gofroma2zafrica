@@ -5,8 +5,10 @@ import FooterNav from "./FooterNav";
 import FooterNewsletter from "./FooterNewsletter";
 import FooterSocial from "./FooterSocial";
 import Logo from "@/components/ui/logo";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
   return (
     <footer className="relative mt-20 border-t border-white/10">
       {/* Ambient light effect */}
@@ -16,7 +18,7 @@ export default function Footer() {
       </div>
 
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {/* Brand Section */}
           <div className="space-y-6">
             <Logo />
@@ -24,21 +26,37 @@ export default function Footer() {
               Empowering African businesses with cutting-edge solutions and
               global connectivity.
             </p>
+            <p className="text-text-secondary text-sm max-w-xs">
+              📞+234 706 609 6155 <br />
+            </p>
+            <p className="text-text-secondary text-sm max-w-xs">
+              📍edo Street junction ekosodin. Beside GT laundry
+            </p>
             <FooterSocial />
           </div>
 
           {/* Navigation Sections */}
-          <FooterNav
-            title="Company"
-            links={[
-              { name: "About Us", href: "/about" },
-              { name: "Careers", href: "/careers" },
-              { name: "Press", href: "/press" },
-              { name: "Blog", href: "/blog" },
-            ]}
-          />
+          <div>
+            <span className="font-bold text-2xl tracking-tight">
+              Useful Links
+            </span>
+            <FooterNav
+              title="Company"
+              links={[
+                {
+                  name: "About Us",
+                  href: pathname === "/" ? "#about-us" : "/#about-us",
+                },
+                { name: "Privacy", href: "/privacy" },
+                { name: "Terms", href: "/terms" },
+                // { name: "Careers", href: "/careers" },
+                // { name: "Press", href: "/press" },
+                // { name: "Blog", href: "/blog" },
+              ]}
+            />
+          </div>
 
-          <FooterNav
+          {/* <FooterNav
             title="Resources"
             links={[
               { name: "Documentation", href: "/docs" },
@@ -46,7 +64,7 @@ export default function Footer() {
               { name: "Privacy", href: "/privacy" },
               { name: "Terms", href: "/terms" },
             ]}
-          />
+          /> */}
 
           {/* Newsletter Section */}
           <FooterNewsletter />
