@@ -8,7 +8,9 @@ import { getStatusStyle } from "@/lib/utils/orderUtils";
 import Link from "next/link";
 
 export default function DashboardStats() {
-  const [dashboardData, setDashboardData] = useState<StoreDashboardData | null>(null);
+  const [dashboardData, setDashboardData] = useState<StoreDashboardData | null>(
+    null
+  );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -19,8 +21,12 @@ export default function DashboardStats() {
         const data = await getStoreDashboard();
         setDashboardData(data);
       } catch (error) {
-        console.error('Error fetching dashboard:', error);
-        setError(error instanceof Error ? error.message : "Failed to fetch dashboard data");
+        console.error("Error fetching dashboard:", error);
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Failed to fetch dashboard data"
+        );
       } finally {
         setLoading(false);
       }
@@ -28,7 +34,7 @@ export default function DashboardStats() {
 
     fetchDashboard();
     const intervalId = setInterval(fetchDashboard, 5 * 60 * 1000); // Refresh every 5 minutes
-    
+
     return () => clearInterval(intervalId);
   }, []);
 
@@ -54,39 +60,60 @@ export default function DashboardStats() {
     <div className="space-y-8">
       {/* Revenue Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="bg-white p-6 rounded-lg shadow-sm"
         >
           <h3 className="text-lg font-semibold mb-4">Today's Revenue</h3>
-          <p className="text-3xl font-bold">₦{dashboardData.stats.revenue.today.toLocaleString()}</p>
+          <p className="text-3xl font-bold">
+            ₦
+            {isNaN(dashboardData.stats.revenue.today)
+              ? 0
+              : dashboardData.stats.revenue.today.toLocaleString()}
+          </p>
           <p className="text-sm text-gray-500 mt-2">
-            Yesterday: ₦{dashboardData.stats.revenue.yesterday.toLocaleString()}
+            Yesterday: ₦
+            {isNaN(dashboardData.stats.revenue.yesterday)
+              ? 0
+              : dashboardData.stats.revenue.yesterday.toLocaleString()}
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="bg-white p-6 rounded-lg shadow-sm"
         >
           <h3 className="text-lg font-semibold mb-4">This Month</h3>
-          <p className="text-3xl font-bold">₦{dashboardData.stats.revenue.thisMonth.toLocaleString()}</p>
+          <p className="text-3xl font-bold">
+            ₦
+            {isNaN(dashboardData.stats.revenue.thisMonth)
+              ? 0
+              : dashboardData.stats.revenue.thisMonth.toLocaleString()}
+          </p>
           <p className="text-sm text-gray-500 mt-2">
-            Daily Average: ₦{dashboardData.stats.revenue.dailyAverage.toLocaleString()}
+            Daily Average: ₦
+            {isNaN(dashboardData.stats.revenue.dailyAverage)
+              ? 0
+              : dashboardData.stats.revenue.thisMonth.toLocaleString()}
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
           className="bg-white p-6 rounded-lg shadow-sm"
         >
           <h3 className="text-lg font-semibold mb-4">Total Revenue</h3>
-          <p className="text-3xl font-bold">₦{dashboardData.stats.revenue.total.toLocaleString()}</p>
+          <p className="text-3xl font-bold">
+            ₦
+            {isNaN(dashboardData.stats.revenue.total)
+              ? 0
+              : dashboardData.stats.revenue.total.toLocaleString()}
+          </p>
           <p className="text-sm text-gray-500 mt-2">
             Total Orders: {dashboardData.stats.orders}
           </p>
@@ -98,7 +125,7 @@ export default function DashboardStats() {
         <h3 className="text-xl font-semibold mb-6">Recent Orders</h3>
         <div className="space-y-4">
           {dashboardData.recentOrders.map((order) => (
-            <Link 
+            <Link
               href={`/dashboard/orders/${order._id}`}
               key={order._id}
               className="block hover:bg-gray-50 p-4 rounded-lg transition-colors"
@@ -110,8 +137,12 @@ export default function DashboardStats() {
                     {new Date(order.createdAt).toLocaleDateString()}
                   </p>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusStyle(order.status)}`}>
-                  {order.status.replace(/_/g, ' ')}
+                <span
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusStyle(
+                    order.status
+                  )}`}
+                >
+                  {order.status.replace(/_/g, " ")}
                 </span>
               </div>
               <div className="mt-2 text-sm text-gray-600">
@@ -132,12 +163,19 @@ export default function DashboardStats() {
           <h3 className="text-xl font-semibold mb-6">Top Products</h3>
           <div className="space-y-4">
             {dashboardData.topProducts.map((product) => (
-              <div key={product._id} className="flex justify-between items-center">
+              <div
+                key={product._id}
+                className="flex justify-between items-center"
+              >
                 <div>
                   <p className="font-medium">{product.name}</p>
-                  <p className="text-sm text-gray-600">Sold: {product.totalSold}</p>
+                  <p className="text-sm text-gray-600">
+                    Sold: {product.totalSold}
+                  </p>
                 </div>
-                <p className="font-medium">₦{(product.revenue || 0).toLocaleString()}</p>
+                <p className="font-medium">
+                  ₦{(product.revenue || 0).toLocaleString()}
+                </p>
               </div>
             ))}
           </div>
@@ -145,4 +183,4 @@ export default function DashboardStats() {
       )}
     </div>
   );
-} 
+}

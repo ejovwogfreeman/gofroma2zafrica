@@ -29,9 +29,9 @@ export default function TopNav({
           </button>
 
           <Link href="/dashboard">
-            <span className="text-xl font-bold text-gray-900 sm:block hidden">
+            {/* <span className="text-xl font-bold text-gray-900 sm:block hidden">
               Store Name
-            </span>
+            </span> */}
           </Link>
         </div>
 

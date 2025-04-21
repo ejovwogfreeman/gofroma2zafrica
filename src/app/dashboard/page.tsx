@@ -267,7 +267,9 @@ export default function DashboardPage() {
   // Show dashboard if store exists
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-8">
+        {storeData?.storeName} Dashboard
+      </h1>
       <DashboardStats />
     </div>
   );
