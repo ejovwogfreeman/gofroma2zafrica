@@ -136,8 +136,12 @@ export default function Privacy() {
                   <li>Withdraw consent (where applicable)</li>
                 </ul>
                 <p>
-                  To exercise these rights, please contact us at:{" "}
-                  <strong>[Insert support email/contact page]</strong>
+                  To exercise these rights, please contact us at: <br />
+                  <strong>
+                    Email: alphainteractivehub@gmail.com <br />
+                    Phone: +234 706 609 6155 <br />
+                    Support Center: support@gofroma2zafrica.com
+                  </strong>
                 </p>
 
                 <h2 className="text-2xl font-semibold mt-6">
@@ -152,9 +156,9 @@ export default function Privacy() {
                   8. 🌍 International Users
                 </h2>
                 <p>
-                  If you are accessing our platform from outside [Your Country],
-                  please note that your data may be transferred to and processed
-                  in [Your Country], where our servers and offices are located.
+                  If you are accessing our platform from outside Nigeria, please
+                  note that your data may be transferred to and processed in
+                  Nigeria, where our servers and offices are located.
                 </p>
 
                 <h2 className="text-2xl font-semibold mt-6">

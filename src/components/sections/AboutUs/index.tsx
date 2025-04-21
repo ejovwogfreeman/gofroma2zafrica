@@ -70,9 +70,7 @@ export default function AboutUs() {
               <div className="relative z-10">
                 <div className="flex items-center space-x-4 mb-4">
                   <span className="text-3xl">{feature.icon}</span>
-                  <h3 className="text-xl font-semibold text-white">
-                    {feature.title}
-                  </h3>
+                  <h3 className="text-xl font-semibold">{feature.title}</h3>
                 </div>
                 <p className="text-text-secondary">{feature.description}</p>
               </div>

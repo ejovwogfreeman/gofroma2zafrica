@@ -47,8 +47,8 @@ export default function Footer() {
                   name: "About Us",
                   href: pathname === "/" ? "#about-us" : "/#about-us",
                 },
-                { name: "Privacy", href: "/privacy" },
-                { name: "Terms", href: "/terms" },
+                { name: "Privacy Policy", href: "/privacy" },
+                { name: "Terms of Service", href: "/terms" },
                 // { name: "Careers", href: "/careers" },
                 // { name: "Press", href: "/press" },
                 // { name: "Blog", href: "/blog" },
@@ -79,16 +79,16 @@ export default function Footer() {
             </p>
             <div className="flex items-center space-x-4">
               <motion.a
-                href="#"
-                className="text-text-secondary hover:text-white text-sm transition-colors"
+                href="/privacy"
+                className="text-text-secondary hover:text-gold-primary text-sm transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Privacy Policy
               </motion.a>
               <motion.a
-                href="#"
-                className="text-text-secondary hover:text-white text-sm transition-colors"
+                href="/terms"
+                className="text-text-secondary hover:text-gold-primary text-sm transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

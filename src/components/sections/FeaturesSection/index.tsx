@@ -1,17 +1,19 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 const features = [
   {
     title: "Real-Time Tracking",
-    description: "Track your deliveries in real-time with live updates and notifications",
+    description:
+      "Track your deliveries in real-time with live updates and notifications",
     icon: "🚚",
     gradient: "from-gold-primary/20 to-gold-secondary/20",
   },
   {
     title: "Zone-Based Delivery",
-    description: "Efficient delivery zones for better coverage and faster service",
+    description:
+      "Efficient delivery zones for better coverage and faster service",
     icon: "🎯",
     gradient: "from-gold-secondary/20 to-gold-accent/20",
   },
@@ -39,7 +41,7 @@ const features = [
     icon: "🤝",
     gradient: "from-gold-highlight/20 to-gold-accent/20",
   },
-]
+];
 
 export default function FeaturesSection() {
   return (
@@ -49,10 +51,10 @@ export default function FeaturesSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-dark-primary via-transparent to-dark-primary opacity-80" />
         <div className="hero-glow" />
       </div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,31 +79,29 @@ export default function FeaturesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ 
+              whileHover={{
                 backgroundColor: "rgba(var(--gold-primary-rgb), 0.05)",
-                transition: { duration: 0.3 }
+                transition: { duration: 0.3 },
               }}
             >
               <div className="relative z-10">
                 <div className="flex items-center space-x-4 mb-4">
                   <span className="text-3xl">{feature.icon}</span>
-                  <h3 className="text-xl font-semibold text-white">
-                    {feature.title}
-                  </h3>
+                  <h3 className="text-xl font-semibold">{feature.title}</h3>
                 </div>
-                <p className="text-text-secondary">
-                  {feature.description}
-                </p>
+                <p className="text-text-secondary">{feature.description}</p>
               </div>
 
               {/* Ambient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
+              />
             </motion.div>
           ))}
         </div>
 
         {/* Floating Elements */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/3 left-0 w-72 h-72 bg-gradient-to-r from-gold-primary/20 to-gold-secondary/20 rounded-full blur-3xl"
           animate={{
             y: [0, 50, 0],
@@ -113,7 +113,7 @@ export default function FeaturesSection() {
             ease: "easeInOut",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/3 right-0 w-96 h-96 bg-gradient-to-r from-gold-accent/20 to-gold-highlight/20 rounded-full blur-3xl"
           animate={{
             y: [0, -50, 0],
@@ -127,5 +127,5 @@ export default function FeaturesSection() {
         />
       </div>
     </section>
-  )
+  );
 }

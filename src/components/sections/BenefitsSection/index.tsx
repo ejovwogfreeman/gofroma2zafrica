@@ -1,21 +1,24 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 const benefits = [
   {
     title: "Digital Transformation",
-    description: "Modernize your business operations with cutting-edge digital solutions tailored for African markets",
+    description:
+      "Modernize your business operations with cutting-edge digital solutions tailored for African markets",
     icon: "🚀",
   },
   {
     title: "Market Access",
-    description: "Connect with new customers and expand your reach across African markets",
+    description:
+      "Connect with new customers and expand your reach across African markets",
     icon: "🌍",
   },
   {
     title: "Secure Payments",
-    description: "Reliable and secure payment processing designed for African businesses",
+    description:
+      "Reliable and secure payment processing designed for African businesses",
     icon: "🔒",
   },
   {
@@ -23,7 +26,7 @@ const benefits = [
     description: "Make data-driven decisions with powerful analytics tools",
     icon: "📊",
   },
-]
+];
 
 export default function BenefitsSection() {
   return (
@@ -33,10 +36,10 @@ export default function BenefitsSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-dark-primary via-transparent to-dark-primary opacity-80" />
         <div className="hero-glow" /> {/* Reusing hero glow effect */}
       </div>
-      
+
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +50,8 @@ export default function BenefitsSection() {
             Why Choose Us
           </h2>
           <p className="text-text-secondary max-w-2xl mx-auto text-lg">
-            Unlock your business potential with our comprehensive suite of digital solutions
+            Unlock your business potential with our comprehensive suite of
+            digital solutions
           </p>
         </motion.div>
 
@@ -61,9 +65,9 @@ export default function BenefitsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ 
+              whileHover={{
                 backgroundColor: "rgba(var(--gold-primary-rgb), 0.05)",
-                transition: { duration: 0.3 }
+                transition: { duration: 0.3 },
               }}
             >
               <div className="flex items-start space-x-4">
@@ -71,12 +75,10 @@ export default function BenefitsSection() {
                   <span className="text-2xl">{benefit.icon}</span>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-xl font-semibold mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-text-secondary">
-                    {benefit.description}
-                  </p>
+                  <p className="text-text-secondary">{benefit.description}</p>
                 </div>
               </div>
             </motion.div>
@@ -84,7 +86,7 @@ export default function BenefitsSection() {
         </div>
 
         {/* Floating Elements - matching hero section style */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 left-10 w-20 h-20 bg-gradient-to-r from-gold-primary/20 to-gold-secondary/20 rounded-full blur-xl"
           animate={{
             y: [0, 20, 0],
@@ -96,7 +98,7 @@ export default function BenefitsSection() {
             ease: "easeInOut",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-1/4 right-10 w-32 h-32 bg-gradient-to-r from-gold-accent/20 to-gold-highlight/20 rounded-full blur-xl"
           animate={{
             y: [0, -30, 0],
@@ -110,5 +112,5 @@ export default function BenefitsSection() {
         />
       </div>
     </section>
-  )
+  );
 }
