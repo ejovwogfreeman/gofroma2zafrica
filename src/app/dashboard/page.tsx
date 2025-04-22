@@ -369,14 +369,12 @@ function CreateStore({
       className="max-w-2xl mx-auto"
     >
       <div className="bg-dark-secondary rounded-lg p-8 border border-dark/10">
-        <h1 className="text-2xl font-bold text-white mb-6">
-          Create Your Store
-        </h1>
+        <h1 className="text-2xl font-bold mb-6">Create Your Store</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Store Details Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-white">Store Details</h3>
+            <h3 className="text-lg font-medium">Store Details</h3>
 
             <input
               type="text"
@@ -386,7 +384,7 @@ function CreateStore({
                 setFormData({ ...formData, storeName: e.target.value })
               }
               className="w-full px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+               placeholder:text-gray-400 focus:outline-none focus:ring-2 
                 focus:ring-gold-primary focus:border-transparent"
               required
             />
@@ -398,7 +396,7 @@ function CreateStore({
                 setFormData({ ...formData, description: e.target.value })
               }
               className="w-full px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+               placeholder:text-gray-400 focus:outline-none focus:ring-2 
                 focus:ring-gold-primary focus:border-transparent"
               rows={4}
               required
@@ -410,7 +408,7 @@ function CreateStore({
                 setFormData({ ...formData, category: e.target.value })
               }
               className="w-full px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                text-white focus:outline-none focus:ring-2 focus:ring-gold-primary 
+               focus:outline-none focus:ring-2 focus:ring-gold-primary 
                 focus:border-transparent"
             >
               <option value="FASHION">Fashion</option>
@@ -424,9 +422,7 @@ function CreateStore({
 
           {/* Contact Information Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-white">
-              Contact Information
-            </h3>
+            <h3 className="text-lg font-medium">Contact Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="email"
@@ -442,7 +438,7 @@ function CreateStore({
                   })
                 }
                 className="px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                  text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+                 placeholder:text-gray-400 focus:outline-none focus:ring-2 
                   focus:ring-gold-primary focus:border-transparent"
                 required
               />
@@ -460,7 +456,7 @@ function CreateStore({
                   })
                 }
                 className="px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                  text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+                 placeholder:text-gray-400 focus:outline-none focus:ring-2 
                   focus:ring-gold-primary focus:border-transparent"
                 required
               />
@@ -469,7 +465,7 @@ function CreateStore({
 
           {/* Address Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-white">Store Address</h3>
+            <h3 className="text-lg font-medium">Store Address</h3>
             <div className="grid grid-cols-1 gap-4">
               <input
                 type="text"
@@ -482,7 +478,7 @@ function CreateStore({
                   })
                 }
                 className="px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                  text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+                 placeholder:text-gray-400 focus:outline-none focus:ring-2 
                   focus:ring-gold-primary focus:border-transparent"
                 required
               />
@@ -498,7 +494,7 @@ function CreateStore({
                     })
                   }
                   className="px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                    text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+                   placeholder:text-gray-400 focus:outline-none focus:ring-2 
                     focus:ring-gold-primary focus:border-transparent"
                   required
                 />
@@ -513,7 +509,7 @@ function CreateStore({
                     })
                   }
                   className="px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                    text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+                   placeholder:text-gray-400 focus:outline-none focus:ring-2 
                     focus:ring-gold-primary focus:border-transparent"
                   required
                 />
@@ -532,7 +528,7 @@ function CreateStore({
                   })
                 }
                 className="px-4 py-3 bg-dark-primary border border-white/10 rounded-lg
-                  text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 
+                 placeholder:text-gray-400 focus:outline-none focus:ring-2 
                   focus:ring-gold-primary focus:border-transparent"
                 required
               />
@@ -574,7 +570,7 @@ const MetricCard = ({
       </div>
       <div>
         <p className="text-text-secondary">{title}</p>
-        <p className="text-2xl font-bold text-white">{value}</p>
+        <p className="text-2xl font-bold">{value}</p>
       </div>
     </div>
   </div>
