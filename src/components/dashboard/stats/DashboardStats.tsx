@@ -38,6 +38,8 @@ export default function DashboardStats() {
     return () => clearInterval(intervalId);
   }, []);
 
+  console.log(dashboardData);
+
   if (loading) {
     return (
       <div className="min-h-[400px] flex items-center justify-center">
@@ -110,9 +112,9 @@ export default function DashboardStats() {
           <h3 className="text-lg font-semibold mb-4">Total Revenue</h3>
           <p className="text-3xl font-bold">
             ₦
-            {isNaN(dashboardData.stats.revenue.total)
+            {isNaN(dashboardData.stats.revenue.totalRevenue)
               ? 0
-              : dashboardData.stats.revenue.total.toLocaleString()}
+              : dashboardData.stats.revenue.totalRevenue.toLocaleString()}
           </p>
           <p className="text-sm text-gray-500 mt-2">
             Total Orders: {dashboardData.stats.orders}
