@@ -38,7 +38,7 @@ export default function DashboardStats() {
     return () => clearInterval(intervalId);
   }, []);
 
-  console.log(dashboardData);
+  // console.log(dashboardData);
 
   if (loading) {
     return (
