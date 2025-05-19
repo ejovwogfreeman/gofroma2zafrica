@@ -1,131 +1,131 @@
-import { ProductStatus } from '@/lib/products/types'
+import { ProductStatus } from "@/lib/products/types";
 
 export interface Store {
-  _id: string
-  storeName: string
-  description: string
-  category: string
-  status: string
-  slug: string
-  storeUrl: string
+  _id: string;
+  storeName: string;
+  description: string;
+  category: string;
+  status: string;
+  slug: string;
+  storeUrl: string;
   contactInfo: {
-    email: string
-    phone: string
-    whatsapp: string
-  }
+    email: string;
+    phone: string;
+    whatsapp: string;
+  };
   address: {
-    street: string
-    city: string
-    state: string
-    country: string
-    postalCode: string
-  }
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+  };
   socialLinks?: {
-    instagram: string
-    facebook: string
-  }
+    instagram: string;
+    facebook: string;
+  };
   businessInfo?: {
-    registrationNumber: string
-  }
+    registrationNumber: string;
+  };
   settings: {
-    isVerified: boolean
-    isFeaturedStore: boolean
-    allowRatings: boolean
-    isActive: boolean
-  }
+    isVerified: boolean;
+    isFeaturedStore: boolean;
+    allowRatings: boolean;
+    isActive: boolean;
+  };
   metrics: {
-    totalOrders: number
-    totalRevenue: number
-    totalProducts: number
-  }
-  createdAt: string
-  updatedAt: string
+    totalOrders: number;
+    totalRevenue: number;
+    totalProducts: number;
+  };
+  createdAt: string;
+  updatedAt: string;
   image?: {
-    url: string
-    publicId: string
-  }
-  logo?: string
-  coverImage?: string
-  rating?: number
-  reviewCount?: number
+    url: string;
+    publicId: string;
+  };
+  logo?: string;
+  coverImage?: string;
+  rating?: number;
+  reviewCount?: number;
 }
 
 export interface StoreFilters {
-  page?: number
-  limit?: number
-  category?: string
-  city?: string
-  state?: string
-  country?: string
-  search?: string
-  sortBy?: string
-  sortOrder?: 'asc' | 'desc'
-  minRating?: number
+  page?: number;
+  limit?: number;
+  category?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  search?: string;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
+  minRating?: number;
 }
 
 export interface PaginatedStores {
-  stores: Store[]
+  stores: Store[];
   pagination: {
-    total: number
-    page: number
-    totalPages: number
-    hasMore: boolean
-  }
+    total: number;
+    page: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
 }
 
 export interface ProductFilters {
-  page?: number
-  limit?: number
-  category?: string
-  sortBy?: string
-  sortOrder?: 'asc' | 'desc'
+  page?: number;
+  limit?: number;
+  category?: string;
+  sortBy?: string;
+  sortOrder?: "asc" | "desc";
 }
 
 interface ShippingDimensions {
-  length: number
-  width: number
-  height: number
+  length: number;
+  width: number;
+  height: number;
 }
 
 interface ShippingInfo {
-  dimensions: ShippingDimensions
-  weight: number
-  requiresSpecialHandling: boolean
+  dimensions: ShippingDimensions;
+  weight: number;
+  requiresSpecialHandling: boolean;
 }
 
 export interface Product {
-  _id: string
-  name: string
-  description: string
-  price: number
-  images: string[]
-  category: string
-  storeId: string
-  stock: number
-  status: ProductStatus
-  isPublished: boolean
-  createdAt: Date | string
-  updatedAt: Date | string
-  guestOrderEnabled: boolean
-  minOrderQuantity: number
-  maxOrderQuantity: number
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  images: string[];
+  category: string;
+  storeId: string;
+  stock: number;
+  status: ProductStatus;
+  isPublished: boolean;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+  guestOrderEnabled: boolean;
+  minOrderQuantity: number;
+  maxOrderQuantity: number;
   specifications?: {
-    material?: string
-    size?: string
-    color?: string
-  }
-  variants?: Array<any>
-  shippingInfo?: ShippingInfo
+    material?: string;
+    size?: string;
+    color?: string;
+  };
+  variants?: Array<any>;
+  shippingInfo?: ShippingInfo;
 }
 
 export interface PaginatedProducts {
-  products: Product[]
+  products: Product[];
   pagination: {
-    total: number
-    page: number
-    totalPages: number
-    hasMore: boolean
-  }
+    total: number;
+    page: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
 }
 
 export interface StoreRating {
@@ -144,15 +144,15 @@ export interface CreateStoreRatingData {
   review: string;
 }
 
-export type OrderStatus = 
-  | 'PENDING' 
-  | 'CONFIRMED' 
-  | 'READY_FOR_PICKUP'
-  | 'PICKED_UP' 
-  | 'IN_TRANSIT' 
-  | 'DELIVERED' 
-  | 'CANCELLED' 
-  | 'FAILED_DELIVERY';
+export type OrderStatus =
+  | "PENDING"
+  | "CONFIRMED"
+  | "READY_FOR_PICKUP"
+  | "PICKED_UP"
+  | "IN_TRANSIT"
+  | "DELIVERED"
+  | "CANCELLED"
+  | "FAILED_DELIVERY";
 
 export interface StoreOrder {
   _id: string;
@@ -209,7 +209,7 @@ export interface StoreOrder {
   };
   specialInstructions: string | null;
   isFragile: boolean;
-  packageSize: 'SMALL' | 'MEDIUM' | 'LARGE';
+  packageSize: "SMALL" | "MEDIUM" | "LARGE";
 }
 
 export interface PaginatedStoreOrders {
@@ -366,4 +366,4 @@ export interface UpdatePaymentDetailsData {
   accountName?: string;
   accountNumber?: string;
   bankName?: string;
-} 
+}

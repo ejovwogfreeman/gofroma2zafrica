@@ -58,6 +58,8 @@ export default function DashboardStats() {
 
   if (!dashboardData) return null;
 
+  console.log(dashboardData);
+
   return (
     <div className="space-y-8">
       {/* Revenue Stats */}
@@ -95,11 +97,17 @@ export default function DashboardStats() {
               ? 0
               : dashboardData.stats.revenue.thisMonth.toLocaleString()}
           </p>
-          <p className="text-sm text-gray-500 mt-2">
+          {/* <p className="text-sm text-gray-500 mt-2">
             Daily Average: ₦
             {isNaN(dashboardData.stats.revenue.dailyAverage)
               ? 0
               : dashboardData.stats.revenue.thisMonth.toLocaleString()}
+          </p> */}
+          <p className="text-sm text-gray-500 mt-2">
+            Last Month: ₦
+            {isNaN(dashboardData.stats.revenue.previousMonth)
+              ? 0
+              : dashboardData.stats.revenue.previousMonth.toLocaleString()}
           </p>
         </motion.div>
 

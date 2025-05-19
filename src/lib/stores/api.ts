@@ -370,12 +370,21 @@ export async function getStoreDashboard(): Promise<StoreDashboardData> {
         ...data.data.stats,
         revenue: {
           ...data.data.stats.revenue,
-          total: Number(data.data.stats.revenue.total),
-          today: Number(data.data.stats.revenue.today),
-          yesterday: Number(data.data.stats.revenue.yesterday),
-          thisWeek: Number(data.data.stats.revenue.thisWeek),
-          thisMonth: Number(data.data.stats.revenue.thisMonth),
+          // total: Number(data.data.stats.revenue.total),
+          today: Number(data.data.stats.revenue.daily.current.amount),
+          yesterday: Number(data.data.stats.revenue.daily.previous.amount),
+          // thisWeek: Number(data.data.stats.revenue.thisWeek),
+          thisMonth: Number(data.data.stats.revenue.monthly.current.amount),
+          previousMonth: Number(
+            data.data.stats.revenue.monthly.previous.amount
+          ),
           dailyAverage: Number(data.data.stats.revenue.dailyAverage),
+          totalRevenue: Number(
+            data.data.stats.revenue.breakdown.daily.reduce(
+              (sum: number, d: { amount: number }) => sum + d.amount,
+              0
+            )
+          ),
         },
       },
     };
