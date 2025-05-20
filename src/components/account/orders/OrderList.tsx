@@ -34,11 +34,16 @@ export default function OrderList() {
 
         const response = await getOrders(queryParams);
         setOrders(response.data.orders);
-        setTotalPages(response.data.totalPages || Math.ceil(response.data.total / ordersPerPage));
+        setTotalPages(
+          response.data.totalPages ||
+            Math.ceil(response.data.total / ordersPerPage)
+        );
         setTotalOrders(response.data.total);
       } catch (error) {
-        console.error('Error fetching orders:', error);
-        setError(error instanceof Error ? error.message : "Failed to fetch orders");
+        console.error("Error fetching orders:", error);
+        setError(
+          error instanceof Error ? error.message : "Failed to fetch orders"
+        );
         setOrders([]);
       } finally {
         setLoading(false);
@@ -54,18 +59,18 @@ export default function OrderList() {
     setCurrentPage(1); // Reset to first page when filter changes
   };
 
-  const handleDateChange = (type: 'startDate' | 'endDate', value: string) => {
-    setDateRange(prev => ({
+  const handleDateChange = (type: "startDate" | "endDate", value: string) => {
+    setDateRange((prev) => ({
       ...prev,
-      [type]: value
+      [type]: value,
     }));
     setCurrentPage(1); // Reset to first page when filter changes
   };
 
   const handlePageChange = (newPage: number) => {
-    console.log('Changing to page:', newPage);
+    console.log("Changing to page:", newPage);
     setCurrentPage(newPage);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   if (loading) {
@@ -101,22 +106,22 @@ export default function OrderList() {
             <option value="DELIVERED">Delivered</option>
           </select>
         </div>
-        
+
         <div className="flex-1 min-w-[200px]">
           <input
             type="date"
             value={dateRange.startDate}
-            onChange={(e) => handleDateChange('startDate', e.target.value)}
+            onChange={(e) => handleDateChange("startDate", e.target.value)}
             className="w-full p-2 border rounded-lg"
             placeholder="Start Date"
           />
         </div>
-        
+
         <div className="flex-1 min-w-[200px]">
           <input
             type="date"
             value={dateRange.endDate}
-            onChange={(e) => handleDateChange('endDate', e.target.value)}
+            onChange={(e) => handleDateChange("endDate", e.target.value)}
             className="w-full p-2 border rounded-lg"
             placeholder="End Date"
           />
@@ -127,7 +132,8 @@ export default function OrderList() {
         <h1 className="text-2xl font-bold text-gray-900">My Orders</h1>
         <p className="text-gray-600">
           Showing {(currentPage - 1) * ordersPerPage + 1}-
-          {Math.min(currentPage * ordersPerPage, totalOrders)} of {totalOrders} orders
+          {Math.min(currentPage * ordersPerPage, totalOrders)} of {totalOrders}{" "}
+          orders
         </p>
       </div>
 
@@ -176,13 +182,19 @@ export default function OrderList() {
 
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <p className="font-medium text-gray-900">Delivery Address</p>
-                    <p className="text-gray-600">
-                      {order.deliveryAddress.manualAddress?.street || order.deliveryAddress.street}
+                    <p className="font-medium text-gray-900">
+                      Delivery Address
                     </p>
                     <p className="text-gray-600">
-                      {order.deliveryAddress.manualAddress?.city || order.deliveryAddress.city}, 
-                      {order.deliveryAddress.manualAddress?.state || order.deliveryAddress.state}
+                      {order.deliveryAddress.manualAddress?.street ||
+                        order.deliveryAddress.street}
+                    </p>
+                    <p className="text-gray-600">
+                      {order.deliveryAddress.manualAddress?.city ||
+                        order.deliveryAddress.city}
+                      ,
+                      {order.deliveryAddress.manualAddress?.state ||
+                        order.deliveryAddress.state}
                     </p>
                   </div>
                   <div className="text-right">
@@ -192,7 +204,8 @@ export default function OrderList() {
                     </p>
                     {order.zonePrice && (
                       <p className="text-gray-600 text-sm">
-                        (Includes ₦{order.zonePrice.toLocaleString()} delivery fee)
+                        (Includes ₦{order.zonePrice.toLocaleString()} delivery
+                        fee)
                       </p>
                     )}
                   </div>
@@ -208,35 +221,40 @@ export default function OrderList() {
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
                 className={`px-4 py-2 rounded-lg text-sm font-medium
-                  ${currentPage === 1
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  ${
+                    currentPage === 1
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
               >
                 Previous
               </button>
-              
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  onClick={() => handlePageChange(page)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium
-                    ${currentPage === page
-                      ? 'bg-gold-primary text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium
+                    ${
+                      currentPage === page
+                        ? "bg-gold-primary text-white"
+                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}
-                >
-                  {page}
-                </button>
-              ))}
-              
+                  >
+                    {page}
+                  </button>
+                )
+              )}
+
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
                 className={`px-4 py-2 rounded-lg text-sm font-medium
-                  ${currentPage === totalPages
-                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  ${
+                    currentPage === totalPages
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                   }`}
               >
                 Next

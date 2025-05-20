@@ -371,19 +371,102 @@ export async function getStoreDashboard(): Promise<StoreDashboardData> {
         revenue: {
           ...data.data.stats.revenue,
           // total: Number(data.data.stats.revenue.total),
-          today: Number(data.data.stats.revenue.daily.current.amount),
-          yesterday: Number(data.data.stats.revenue.daily.previous.amount),
+          // today: Number(data.data.stats.revenue.daily.current.amount),
+          // yesterday: Number(data.data.stats.revenue.daily.previous.amount),
           // thisWeek: Number(data.data.stats.revenue.thisWeek),
-          thisMonth: Number(data.data.stats.revenue.monthly.current.amount),
-          previousMonth: Number(
-            data.data.stats.revenue.monthly.previous.amount
-          ),
+          // thisMonth: Number(data.data.stats.revenue.monthly.current.amount),
+          // previousMonth: Number(
+          //   data.data.stats.revenue.monthly.previous.amount
+          // ),
           dailyAverage: Number(data.data.stats.revenue.dailyAverage),
           totalRevenue: Number(
             data.data.stats.revenue.breakdown.daily.reduce(
               (sum: number, d: { amount: number }) => sum + d.amount,
               0
             )
+          ),
+          // updated
+          today: Number(
+            data.data.stats.revenue.breakdown.daily
+              .filter(
+                (d: { date: string; amount: number }) =>
+                  d.date === new Date().toISOString().split("T")[0]
+              )
+              .reduce(
+                (sum: number, d: { date: string; amount: number }) =>
+                  sum + d.amount,
+                0
+              )
+          ),
+          yesterday: Number(
+            data.data.stats.revenue.breakdown.daily
+              .filter(
+                (d: { date: string; amount: number }) =>
+                  d.date ===
+                  new Date(Date.now() - 86400000).toISOString().split("T")[0]
+              )
+              .reduce(
+                (sum: number, d: { date: string; amount: number }) =>
+                  sum + d.amount,
+                0
+              )
+          ),
+          // thisWeek: Number(
+          //   data.data.stats.revenue.breakdown.daily
+          //     .filter((d: { date: string; amount: number }) => {
+          //       const entryDate = new Date(d.date);
+          //       const today = new Date();
+          //       const startOfWeek = new Date(today);
+          //       startOfWeek.setDate(today.getDate() - today.getDay() + 1); // Monday (assuming week starts on Monday)
+
+          //       return entryDate >= startOfWeek && entryDate <= today;
+          //     })
+          //     .reduce(
+          //       (sum: number, d: { date: string; amount: number }) =>
+          //         sum + d.amount,
+          //       0
+          //     )
+          // ),
+          thisMonth: Number(
+            data.data.stats.revenue.breakdown.daily
+              .filter((d: { date: string; amount: number }) => {
+                const entryDate = new Date(d.date);
+                const today = new Date();
+                return (
+                  entryDate.getFullYear() === today.getFullYear() &&
+                  entryDate.getMonth() === today.getMonth()
+                );
+              })
+              .reduce(
+                (sum: number, d: { date: string; amount: number }) =>
+                  sum + d.amount,
+                0
+              )
+          ),
+          previousMonth: Number(
+            data.data.stats.revenue.breakdown.daily
+              .filter((d: { date: string; amount: number }) => {
+                const entryDate = new Date(d.date);
+                const today = new Date();
+
+                // Get previous month and year (handle January correctly)
+                const prevMonth =
+                  today.getMonth() === 0 ? 11 : today.getMonth() - 1;
+                const prevMonthYear =
+                  today.getMonth() === 0
+                    ? today.getFullYear() - 1
+                    : today.getFullYear();
+
+                return (
+                  entryDate.getFullYear() === prevMonthYear &&
+                  entryDate.getMonth() === prevMonth
+                );
+              })
+              .reduce(
+                (sum: number, d: { date: string; amount: number }) =>
+                  sum + d.amount,
+                0
+              )
           ),
         },
       },

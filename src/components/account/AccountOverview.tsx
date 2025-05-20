@@ -64,6 +64,8 @@ export default function AccountOverview() {
     fetchData();
   }, []);
 
+  console.log(analytics);
+
   return (
     <div className="space-y-8">
       {/* Profile Summary */}
@@ -105,6 +107,7 @@ export default function AccountOverview() {
       </motion.div>
 
       {/* Analytics Overview */}
+
       {analytics.overview && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
