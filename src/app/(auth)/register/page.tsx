@@ -1,4 +1,4 @@
-import AccountTypeSelector from "@/components/auth/AccountTypeSelector"
+import AccountTypeSelector from "@/components/auth/AccountTypeSelector";
 
 export default function RegisterPage() {
   return (
@@ -13,5 +13,5 @@ export default function RegisterPage() {
         <AccountTypeSelector />
       </div>
     </div>
-  )
-} 
+  );
+}

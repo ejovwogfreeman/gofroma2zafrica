@@ -1,20 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-export default function LoginForm() {
+export default function ForgetPasswordForm() {
   const router = useRouter();
   const [accountType, setAccountType] = useState<"merchant" | "consumer">(
     "merchant"
   );
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+  const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -26,7 +22,9 @@ export default function LoginForm() {
     setMessage("");
 
     const endpoint =
-      accountType === "merchant" ? "/api/users/login" : "/api/consumers/login";
+      accountType === "merchant"
+        ? "/api/users/forgot-password"
+        : "/api/consumers/forgot-password";
 
     try {
       const response = await fetch(
@@ -36,7 +34,7 @@ export default function LoginForm() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({ email }),
         }
       );
 
@@ -44,19 +42,15 @@ export default function LoginForm() {
 
       if (response.ok) {
         setStatus("success");
-        localStorage.setItem("token", data.data.token);
-        localStorage.setItem("userType", accountType);
-
-        // Redirect based on account type
-        router.replace(
-          accountType === "merchant" ? "/dashboard" : "/account/stores"
-        );
+        setMessage(data.message || "OTP sent to your email.");
+        // You can redirect to a verification page if needed
+        // router.push(`/verify-otp?email=${email}&type=${accountType}`);
       } else {
         setStatus("error");
-        setMessage(data.message || "Login failed. Please try again.");
+        setMessage(data.message || "Failed to send OTP.");
       }
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("OTP error:", err);
       setStatus("error");
       setMessage("An error occurred. Please try again.");
     }
@@ -69,23 +63,23 @@ export default function LoginForm() {
       transition={{ duration: 0.8 }}
       className="max-w-xl mx-auto"
     >
-      {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-display-small font-bold hero-gradient-text mb-4">
-          Welcome Back
+          Forgot Password?
         </h1>
-        <p className="text-text-secondary text-lg">Log in to your account</p>
+        <p className="text-text-secondary text-lg">
+          Enter your email to receive a verification code
+        </p>
       </div>
 
-      {/* Login Form */}
       <motion.form
+        onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        onSubmit={handleSubmit}
         className="space-y-6 bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10"
       >
-        {/* Account Type */}
+        {/* Account Type Switch */}
         <div className="mb-6">
           <label className="block text-dark mb-2">Account Type</label>
           <div className="flex gap-4">
@@ -114,7 +108,7 @@ export default function LoginForm() {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Email Field */}
         <div>
           <label htmlFor="email" className="block text-dark mb-2">
             Email Address
@@ -122,85 +116,37 @@ export default function LoginForm() {
           <input
             type="email"
             id="email"
-            value={formData.email}
-            onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
-            }
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
               text-dark placeholder:text-gray-400
               focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent
               hover:border-gold-primary/50
               transition-all duration-300"
-            required
-          />
-        </div>
-
-        {/* Password */}
-        <div>
-          <label htmlFor="password" className="block text-dark mb-2">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
-              text-dark placeholder:text-gray-400
-              focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent
-              hover:border-gold-primary/50
-              transition-all duration-300"
-            required
           />
         </div>
 
         {/* Submit Button */}
-        <SubmitButton status={status} text="Log In" />
+        <SubmitButton status={status} text="Send OTP" />
 
-        {/* Status Message */}
+        {/* Message */}
         <StatusMessage status={status} message={message} />
 
-        {/* Register Link */}
+        {/* Back to Login */}
         <div className="text-center mt-4">
           <Link
-            href="/register"
+            href="/login"
             className="text-gold-primary hover:text-gold-secondary transition-colors"
           >
-            Don't have an account? Register here
-          </Link>
-        </div>
-        {/* Register Link */}
-        <div className="text-center mt-4">
-          <Link
-            href="/forget-password"
-            className="text-gold-primary hover:text-gold-secondary transition-colors"
-          >
-            Forgot Password?
+            ← Back to Login
           </Link>
         </div>
       </motion.form>
-
-      {/* Back Link */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="mt-8 text-center"
-      >
-        <Link
-          href="/"
-          className="text-text-secondary hover:text-dark transition-colors"
-        >
-          ← Back to Home
-        </Link>
-      </motion.div>
     </motion.div>
   );
 }
 
-// Helper Components (same as RegisterForm)
 const SubmitButton = ({ status, text }: { status: string; text: string }) => (
   <motion.button
     type="submit"
