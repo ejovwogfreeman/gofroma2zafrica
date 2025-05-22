@@ -2,8 +2,12 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function ResetPasswordForm() {
+  const searchParams = useSearchParams();
+  const accountType = searchParams.get("accountType") || "consumer";
+
   const [formData, setFormData] = useState({
     email: "",
     otp: "",
@@ -27,15 +31,22 @@ export default function ResetPasswordForm() {
       return;
     }
 
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "";
+    const endpoint = `${baseUrl}/api/${
+      accountType === "merchant" ? "users" : "consumer"
+    }/reset-password`;
+
+    console.log(endpoint);
+
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/reset-password`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        }
-      );
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: formData.otp,
+          password: formData.password,
+        }),
+      });
 
       const data = await res.json();
 
@@ -154,7 +165,7 @@ export default function ResetPasswordForm() {
   );
 }
 
-// Reusable Components
+// Submit Button Component
 const SubmitButton = ({ status, text }: { status: string; text: string }) => (
   <motion.button
     type="submit"
@@ -176,6 +187,7 @@ const SubmitButton = ({ status, text }: { status: string; text: string }) => (
   </motion.button>
 );
 
+// Loading Dots Component
 const LoadingDots = () => (
   <div className="flex items-center justify-center space-x-2">
     {[0, 1, 2].map((i) => (
@@ -189,6 +201,7 @@ const LoadingDots = () => (
   </div>
 );
 
+// Status Message Component
 const StatusMessage = ({
   status,
   message,
@@ -196,7 +209,7 @@ const StatusMessage = ({
   status: string;
   message: string;
 }) =>
-  message && (
+  message ? (
     <motion.p
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -205,5 +218,13 @@ const StatusMessage = ({
       }`}
     >
       {message}
+      {status === "success" && (
+        <a
+          href="/login"
+          className="ms-2 mt-2 inline-block text-gold-primary underline hover:text-gold-secondary transition"
+        >
+          Click here to log in
+        </a>
+      )}
     </motion.p>
-  );
+  ) : null;
