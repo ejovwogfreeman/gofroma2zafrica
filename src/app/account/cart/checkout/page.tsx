@@ -103,19 +103,19 @@ function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Check for authentication token in localStorage (only runs on client)
         const token = localStorage.getItem("token");
         if (!token) {
           router.push("/login");
           return;
         }
 
-        // Fetch cart data
         const cartData = await getCart();
         if (!cartData || cartData.items.length === 0) {
           router.push("/account/cart");
@@ -123,7 +123,6 @@ function CheckoutPage() {
         }
         setCart(cartData);
 
-        // Fetch delivery zones
         const zonesData = await getDeliveryZones();
         setZones(zonesData);
       } catch (err) {
