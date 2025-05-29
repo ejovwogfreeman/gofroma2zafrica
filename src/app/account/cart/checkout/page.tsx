@@ -111,7 +111,9 @@ export default function CheckoutPage() {
 
         if (typeof window === "undefined") return; // guard against server
 
-        const token = localStorage.getItem("token");
+        const token =
+          typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
         if (!token) {
           router.push("/login");
           return;
@@ -128,7 +130,12 @@ export default function CheckoutPage() {
         setZones(zonesData);
       } catch (err) {
         if (err instanceof Error && err.message.includes("Invalid token")) {
-          localStorage.removeItem("token");
+          // localStorage.removeItem("token");
+          const token =
+            typeof window !== "undefined"
+              ? localStorage.getItem("token")
+              : null;
+
           router.push("/login");
         } else {
           setError(
