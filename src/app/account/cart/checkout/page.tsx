@@ -89,13 +89,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
 import { getCart } from "@/lib/cart/api";
 import { Cart } from "@/lib/cart/types";
 import { getDeliveryZones, Zone } from "@/lib/zones/api";
 import CheckoutForm from "@/components/account/cart/CheckoutForm";
 
-function CheckoutPage() {
+export const dynamic = "force-dynamic";
+
+export default function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState<Cart | null>(null);
   const [zones, setZones] = useState<Zone[]>([]);
@@ -103,12 +104,12 @@ function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
+
+        if (typeof window === "undefined") return; // guard against server
 
         const token = localStorage.getItem("token");
         if (!token) {
@@ -173,5 +174,3 @@ function CheckoutPage() {
     </div>
   );
 }
-
-export default dynamic(() => Promise.resolve(CheckoutPage), { ssr: false });
