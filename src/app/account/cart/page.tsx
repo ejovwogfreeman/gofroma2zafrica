@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import CartClient from "@/components/account/cart/CartClient";
 import { useEffect } from "react";
@@ -16,4 +16,4 @@ export default function CartPage() {
   }, [router]);
 
   return <CartClient />;
-} 
+}

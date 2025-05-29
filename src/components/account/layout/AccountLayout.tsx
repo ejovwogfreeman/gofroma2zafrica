@@ -17,9 +17,9 @@ export default function AccountLayout({
 
   useEffect(() => {
     // If we're on /account/stores/:slug, skip authentication
-    if (pathname?.startsWith("/account/stores")) {
-      return;
-    }
+    // if (pathname?.startsWith("/account/stores")) {
+    //   return;
+    // }
 
     const token = localStorage.getItem("token");
     const userType = localStorage.getItem("userType");
