@@ -14,65 +14,20 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setLoading(true);
-  //       setError(null);
-
-  //       // Check for authentication
-  //       const token = localStorage.getItem("token");
-  //       if (!token) {
-  //         router.push("/login");
-  //         return;
-  //       }
-
-  //       // Fetch cart data
-  //       const cartData = await getCart();
-  //       if (!cartData || cartData.items.length === 0) {
-  //         router.push("/account/cart");
-  //         return;
-  //       }
-  //       setCart(cartData);
-
-  //       // Fetch delivery zones
-  //       const zonesData = await getDeliveryZones();
-  //       setZones(zonesData);
-  //     } catch (err) {
-  //       if (err instanceof Error && err.message.includes("Invalid token")) {
-  //         localStorage.removeItem("token");
-  //         router.push("/login");
-  //       } else {
-  //         setError(
-  //           err instanceof Error ? err.message : "Failed to load checkout data"
-  //         );
-  //       }
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [router]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Safe localStorage access
-        let token = null;
-
-        // if (typeof window !== "undefined") {
-        //   token = localStorage.getItem("token");
-        // }
-
+        // Check for authentication
+        const token = localStorage.getItem("token");
         if (!token) {
           router.push("/login");
           return;
         }
 
+        // Fetch cart data
         const cartData = await getCart();
         if (!cartData || cartData.items.length === 0) {
           router.push("/account/cart");
@@ -80,13 +35,12 @@ export default function CheckoutPage() {
         }
         setCart(cartData);
 
+        // Fetch delivery zones
         const zonesData = await getDeliveryZones();
         setZones(zonesData);
       } catch (err) {
         if (err instanceof Error && err.message.includes("Invalid token")) {
-          // if (typeof window !== "undefined") {
-          //   localStorage.removeItem("token");
-          // }
+          localStorage.removeItem("token");
           router.push("/login");
         } else {
           setError(
