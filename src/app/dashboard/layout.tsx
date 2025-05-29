@@ -16,7 +16,7 @@ const DashboardLayout = memo(function DashboardLayout({
   const router = useRouter();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Sidebar state
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
   const [store, setStore] = useState<Store | null>(null);
 
   useEffect(() => {
@@ -69,8 +69,8 @@ const DashboardLayout = memo(function DashboardLayout({
           isSidebarOpen ? "ml-64" : "ml-0"
         }`}
       >
-        <TopNav 
-          toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} 
+        <TopNav
+          toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           storeName={store?.storeName}
         />
         <main className="p-4 sm:p-8 bg-gray-50">{children}</main>

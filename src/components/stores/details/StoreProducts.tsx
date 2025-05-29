@@ -1,91 +1,96 @@
-"use client"
+"use client";
 
-import { useState, useCallback, useEffect, memo } from 'react'
-import { getStoreProducts } from '@/lib/stores/api'
-import StoreProductCard from '@/components/stores/products/StoreProductCard'
-import { Product } from '@/lib/stores/types'
-import { ProductStatus } from '@/lib/products/types'
+import { useState, useCallback, useEffect, memo } from "react";
+import { getStoreProducts } from "@/lib/stores/api";
+import StoreProductCard from "@/components/stores/products/StoreProductCard";
+import { Product } from "@/lib/stores/types";
+import { ProductStatus } from "@/lib/products/types";
 
 interface StoreProductsProps {
-  storeSlug: string | undefined
-  storeId: string
-  isConsumerDashboard?: boolean
+  storeSlug: string | undefined;
+  storeId: string;
+  isConsumerDashboard?: boolean;
 }
 
-const StoreProducts = memo(function StoreProducts({ 
-  storeSlug, 
+const StoreProducts = memo(function StoreProducts({
+  storeSlug,
   storeId,
-  isConsumerDashboard = false
+  isConsumerDashboard = false,
 }: StoreProductsProps) {
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState({
     page: 1,
     limit: 12,
-    category: '',
-    sortBy: 'createdAt',
-    sortOrder: 'desc' as 'asc' | 'desc'
-  })
-  const [hasMore, setHasMore] = useState(false)
+    category: "",
+    sortBy: "createdAt",
+    sortOrder: "desc" as "asc" | "desc",
+  });
+  const [hasMore, setHasMore] = useState(false);
 
-  const fetchProducts = useCallback(async (isLoadMore = false) => {
-    if (!storeSlug) {
-      console.log('No store slug provided')
-      return
-    }
-
-    try {
-      console.log('Fetching products for store:', storeSlug)
-      setLoading(true)
-      
-      const response = await getStoreProducts(storeSlug, filters)
-      console.log('API Response:', response)
-      
-      if (response?.products?.length > 0) {
-        setProducts(prev => isLoadMore ? [...prev, ...response.products] : response.products)
-        setHasMore(response.pagination?.hasMore || false)
-      } else {
-        if (!isLoadMore) {
-          setProducts([])
-        }
-        setHasMore(false)
+  const fetchProducts = useCallback(
+    async (isLoadMore = false) => {
+      if (!storeSlug) {
+        console.log("No store slug provided");
+        return;
       }
-      setError(null)
-    } catch (err) {
-      console.error('Error fetching products:', err)
-      setError('Failed to load products. Please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }, [storeSlug, filters])
+
+      try {
+        console.log("Fetching products for store:", storeSlug);
+        setLoading(true);
+
+        const response = await getStoreProducts(storeSlug, filters);
+        console.log("API Response:", response);
+
+        if (response?.products?.length > 0) {
+          setProducts((prev) =>
+            isLoadMore ? [...prev, ...response.products] : response.products
+          );
+          setHasMore(response.pagination?.hasMore || false);
+        } else {
+          if (!isLoadMore) {
+            setProducts([]);
+          }
+          setHasMore(false);
+        }
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError("Failed to load products. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [storeSlug, filters]
+  );
 
   useEffect(() => {
     if (storeSlug) {
-      console.log('Fetching products for store slug:', storeSlug)
-      fetchProducts(false)
+      console.log("Fetching products for store slug:", storeSlug);
+      fetchProducts(false);
     }
-  }, [storeSlug, fetchProducts])
+  }, [storeSlug, fetchProducts]);
 
   if (!storeSlug) {
-    return <div>No store selected</div>
+    return <div>No store selected</div>;
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>
+    return <div className="text-red-500">{error}</div>;
   }
 
   if (loading && products.length === 0) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(6)].map((_, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className="bg-black/5 rounded-lg shadow-md h-[300px] animate-pulse"
           />
         ))}
       </div>
-    )
+    );
   }
 
   return (
@@ -93,8 +98,8 @@ const StoreProducts = memo(function StoreProducts({
       {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
-          <StoreProductCard 
-            key={product._id} 
+          <StoreProductCard
+            key={product._id}
             product={product}
             storeId={storeId}
             isConsumerDashboard={isConsumerDashboard}
@@ -116,7 +121,7 @@ const StoreProducts = memo(function StoreProducts({
         </div>
       )}
     </div>
-  )
-})
+  );
+});
 
-export default StoreProducts 
+export default StoreProducts;

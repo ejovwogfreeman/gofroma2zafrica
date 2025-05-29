@@ -44,7 +44,10 @@ export default function ConsumerRegisterForm() {
 
       if (response.ok) {
         setStatus("success");
-        setMessage(data.message);
+        // setMessage(data.message);
+        setMessage(
+          "Registration successful. Please check your email or spam folder for a verification code."
+        );
         setConsumerId(data.consumerId);
         setShowOtpForm(true);
       } else {
@@ -119,6 +122,17 @@ export default function ConsumerRegisterForm() {
           onSubmit={handleSubmit}
           className="space-y-6 bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10"
         >
+          {message && (
+            <p
+              className={`p-2 rounded ${
+                status === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {message}
+            </p>
+          )}
           <div>
             <label htmlFor="firstName" className="block text-dark mb-2">
               First Name
@@ -234,15 +248,17 @@ export default function ConsumerRegisterForm() {
             {status === "loading" ? "Registering..." : "Register Now"}
           </button>
 
-          {message && (
+          {/* {message && (
             <p
-              className={`text-sm ${
-                status === "success" ? "text-green-400" : "text-red-400"
+              className={`p-2 rounded ${
+                status === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
               }`}
             >
               {message}
             </p>
-          )}
+          )} */}
         </motion.form>
       ) : (
         <motion.form

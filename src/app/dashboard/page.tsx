@@ -268,9 +268,15 @@ export default function DashboardPage() {
   // Show dashboard if store exists
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-8">
+      {/* <h1 className="text-2xl font-bold mb-8">
         {storeData?.storeName} Dashboard
-      </h1>
+      </h1> */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl font-bold">{storeData?.storeName} Dashboard</h1>
+        <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition disabled:opacity-50">
+          OPEN STORE
+        </button>
+      </div>
       <DashboardStats />
       <a
         href="https://wa.me/+2347066096155"

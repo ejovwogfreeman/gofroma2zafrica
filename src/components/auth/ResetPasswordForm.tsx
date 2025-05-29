@@ -33,7 +33,7 @@ export default function ResetPasswordForm() {
 
     const baseUrl = process.env.NEXT_PUBLIC_API_URL || "";
     const endpoint = `${baseUrl}/api/${
-      accountType === "merchant" ? "users" : "consumer"
+      accountType === "merchant" ? "users" : "consumers"
     }/reset-password`;
 
     console.log(endpoint);
@@ -89,6 +89,7 @@ export default function ResetPasswordForm() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="space-y-6 bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10"
       >
+        <StatusMessage status={status} message={message} />
         {/* Email */}
         <div>
           <label htmlFor="email" className="block text-dark mb-2">
@@ -159,7 +160,7 @@ export default function ResetPasswordForm() {
         <SubmitButton status={status} text="Reset Password" />
 
         {/* Status Message */}
-        <StatusMessage status={status} message={message} />
+        {/* <StatusMessage status={status} message={message} /> */}
       </motion.form>
     </motion.div>
   );
@@ -213,8 +214,10 @@ const StatusMessage = ({
     <motion.p
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`text-sm ${
-        status === "success" ? "text-green-400" : "text-red-400"
+      className={`p-2 rounded ${
+        status === "success"
+          ? "bg-green-100 text-green-700"
+          : "bg-red-100 text-red-700"
       }`}
     >
       {message}

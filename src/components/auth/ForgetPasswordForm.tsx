@@ -42,7 +42,10 @@ export default function ForgetPasswordForm() {
 
       if (response.ok) {
         setStatus("success");
-        setMessage(data.message || "OTP sent to your email.");
+        // setMessage(data.message || "OTP sent to your email.");
+        setMessage(
+          "Password reset requested successfully. Please check your email or spam folder for a verification code and a link to reset your password."
+        );
         // You can redirect to a verification page if needed
         // router.push(`/verify-otp?email=${email}&type=${accountType}`);
       } else {
@@ -79,6 +82,7 @@ export default function ForgetPasswordForm() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="space-y-6 bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10"
       >
+        <StatusMessage status={status} message={message} />
         {/* Account Type Switch */}
         <div className="mb-6">
           <label className="block text-dark mb-2">Account Type</label>
@@ -131,7 +135,7 @@ export default function ForgetPasswordForm() {
         <SubmitButton status={status} text="Send OTP" />
 
         {/* Message */}
-        <StatusMessage status={status} message={message} />
+        {/* <StatusMessage status={status} message={message} /> */}
 
         {/* Back to Login */}
         <div className="text-center mt-4">
@@ -192,8 +196,10 @@ const StatusMessage = ({
     <motion.p
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`text-sm ${
-        status === "success" ? "text-green-400" : "text-red-400"
+      className={`p-2 rounded ${
+        status === "success"
+          ? "bg-green-100 text-green-700"
+          : "bg-red-100 text-red-700"
       }`}
     >
       {message}

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { rateStore } from "@/lib/stores/api"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { rateStore } from "@/lib/stores/api";
 
 interface RatingFormProps {
   storeId: string;
@@ -10,31 +10,39 @@ interface RatingFormProps {
   onCancel?: () => void;
 }
 
-export default function RatingForm({ storeId, onSuccess, onCancel }: RatingFormProps) {
-  const [rating, setRating] = useState(5)
-  const [review, setReview] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
-  const [message, setMessage] = useState("")
+export default function RatingForm({
+  storeId,
+  onSuccess,
+  onCancel,
+}: RatingFormProps) {
+  const [rating, setRating] = useState(5);
+  const [review, setReview] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus("loading")
-    setMessage("")
+    e.preventDefault();
+    setStatus("loading");
+    setMessage("");
 
     try {
       await rateStore({
         storeId,
         rating,
         review,
-      })
-      setStatus("success")
-      setMessage("Thank you for your review!")
-      onSuccess?.()
+      });
+      setStatus("success");
+      setMessage("Thank you for your review!");
+      onSuccess?.();
     } catch (error) {
-      setStatus("error")
-      setMessage(error instanceof Error ? error.message : "Failed to submit review")
+      setStatus("error");
+      setMessage(
+        error instanceof Error ? error.message : "Failed to submit review"
+      );
     }
-  }
+  };
 
   return (
     <motion.div
@@ -57,9 +65,10 @@ export default function RatingForm({ storeId, onSuccess, onCancel }: RatingFormP
                 type="button"
                 onClick={() => setRating(value)}
                 className={`w-10 h-10 rounded-full flex items-center justify-center
-                  ${rating >= value 
-                    ? "bg-gold-primary text-dark-primary" 
-                    : "bg-dark-primary text-white/70"
+                  ${
+                    rating >= value
+                      ? "bg-gold-primary text-dark-primary"
+                      : "bg-dark-primary text-white/70"
                   } transition-colors`}
               >
                 {value}
@@ -70,7 +79,10 @@ export default function RatingForm({ storeId, onSuccess, onCancel }: RatingFormP
 
         {/* Review */}
         <div>
-          <label htmlFor="review" className="block text-sm font-medium text-white mb-2">
+          <label
+            htmlFor="review"
+            className="block text-sm font-medium text-white mb-2"
+          >
             Review
           </label>
           <textarea
@@ -91,14 +103,15 @@ export default function RatingForm({ storeId, onSuccess, onCancel }: RatingFormP
             type="submit"
             disabled={status === "loading"}
             className={`flex-1 px-6 py-3 rounded-lg font-medium
-              ${status === "loading"
-                ? "bg-gold-primary/50 cursor-not-allowed"
-                : "bg-gold-primary hover:bg-gold-secondary"
+              ${
+                status === "loading"
+                  ? "bg-gold-primary/50 cursor-not-allowed"
+                  : "bg-gold-primary hover:bg-gold-secondary"
               } text-dark-primary transition-colors`}
           >
             {status === "loading" ? "Submitting..." : "Submit Review"}
           </button>
-          
+
           <button
             type="button"
             onClick={onCancel}
@@ -112,11 +125,15 @@ export default function RatingForm({ storeId, onSuccess, onCancel }: RatingFormP
 
         {/* Status Message */}
         {message && (
-          <p className={`text-sm ${status === "success" ? "text-green-400" : "text-red-400"}`}>
+          <p
+            className={`text-sm ${
+              status === "success" ? "text-green-400" : "text-red-400"
+            }`}
+          >
             {message}
           </p>
         )}
       </form>
     </motion.div>
-  )
-} 
+  );
+}

@@ -89,7 +89,34 @@ export default function ProductCard({
     };
   }, []);
 
+  // const handleAddToCart = async () => {
+  //   try {
+  //     setAddingToCart(true);
+  //     setError(null);
+  //     await addToCart({
+  //       productId: product._id,
+  //       quantity: quantity,
+  //     });
+  //     // router.push('/account/cart');
+  //     alert("Product added to cart successfully");
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //     setError(
+  //       error instanceof Error ? error.message : "Failed to add to cart"
+  //     );
+  //   } finally {
+  //     setAddingToCart(false);
+  //   }
+  // };
+
   const handleAddToCart = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
     try {
       setAddingToCart(true);
       setError(null);
@@ -97,7 +124,6 @@ export default function ProductCard({
         productId: product._id,
         quantity: quantity,
       });
-      // router.push('/account/cart');
       alert("Product added to cart successfully");
     } catch (error) {
       console.error("Error adding to cart:", error);

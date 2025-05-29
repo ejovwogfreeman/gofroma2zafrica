@@ -1,84 +1,91 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useCallback } from 'react'
-import { getStoreProducts } from '@/lib/stores/api'
-import { Product } from '@/lib/stores/types'
-import ProductCard from './ProductCard'
-import { useStableDebounce } from '@/lib/hooks'
+import { useEffect, useState, useCallback } from "react";
+import { getStoreProducts } from "@/lib/stores/api";
+import { Product } from "@/lib/stores/types";
+import ProductCard from "./ProductCard";
+import { useStableDebounce } from "@/lib/hooks";
 
 interface ConsumerStoreProductsProps {
   storeSlug: string;
   storeId: string;
 }
 
-export default function ConsumerStoreProducts({ storeSlug, storeId }: ConsumerStoreProductsProps) {
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export default function ConsumerStoreProducts({
+  storeSlug,
+  storeId,
+}: ConsumerStoreProductsProps) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState({
     page: 1,
     limit: 12,
-    sortBy: 'createdAt',
-    sortOrder: 'desc' as 'asc' | 'desc'
-  })
-  const [hasMore, setHasMore] = useState(false)
+    sortBy: "createdAt",
+    sortOrder: "desc" as "asc" | "desc",
+  });
+  const [hasMore, setHasMore] = useState(false);
 
-  const debouncedFilters = useStableDebounce(filters, 500)
+  const debouncedFilters = useStableDebounce(filters, 500);
 
-  const fetchProducts = useCallback(async (isLoadMore = false) => {
-    console.log('Fetching products for:', { storeSlug, storeId }) // Debug log
-    
-    try {
-      setLoading(true)
-      const response = await getStoreProducts(storeSlug, debouncedFilters)
-      console.log('Products response:', response) // Debug log
-      
-      if (response?.products?.length > 0) {
-        setProducts(prev => isLoadMore ? [...prev, ...response.products] : response.products)
-        setHasMore(response.pagination?.hasMore || false)
-      } else {
-        if (!isLoadMore) {
-          setProducts([])
+  const fetchProducts = useCallback(
+    async (isLoadMore = false) => {
+      console.log("Fetching products for:", { storeSlug, storeId }); // Debug log
+
+      try {
+        setLoading(true);
+        const response = await getStoreProducts(storeSlug, debouncedFilters);
+        console.log("Products response:", response); // Debug log
+
+        if (response?.products?.length > 0) {
+          setProducts((prev) =>
+            isLoadMore ? [...prev, ...response.products] : response.products
+          );
+          setHasMore(response.pagination?.hasMore || false);
+        } else {
+          if (!isLoadMore) {
+            setProducts([]);
+          }
+          setHasMore(false);
         }
-        setHasMore(false)
+        setError(null);
+      } catch (error) {
+        console.error("Error fetching products:", error); // Debug log
+        setError("Failed to load products. Please try again.");
+      } finally {
+        setLoading(false);
       }
-      setError(null)
-    } catch (error) {
-      console.error('Error fetching products:', error) // Debug log
-      setError('Failed to load products. Please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }, [storeSlug, debouncedFilters])
+    },
+    [storeSlug, debouncedFilters]
+  );
 
   useEffect(() => {
-    fetchProducts()
-  }, [fetchProducts])
-
+    fetchProducts();
+  }, [fetchProducts]);
 
   if (loading && products.length === 0) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(6)].map((_, i) => (
-          <div 
-            key={i} 
+          <div
+            key={i}
             className="bg-black/5 rounded-lg shadow-md h-[300px] animate-pulse"
           />
         ))}
       </div>
-    )
+    );
   }
 
   if (error) {
-    return <div className="text-red-500">{error}</div>
+    return <div className="text-red-500">{error}</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {products.map((product) => (
-          <ProductCard 
-            key={product._id} 
+          <ProductCard
+            key={product._id}
             product={product}
             storeSlug={storeSlug}
             storeId={storeId}
@@ -99,5 +106,5 @@ export default function ConsumerStoreProducts({ storeSlug, storeId }: ConsumerSt
         </div>
       )}
     </div>
-  )
-} 
+  );
+}
