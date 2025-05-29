@@ -89,12 +89,13 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { getCart } from "@/lib/cart/api";
 import { Cart } from "@/lib/cart/types";
 import { getDeliveryZones, Zone } from "@/lib/zones/api";
 import CheckoutForm from "@/components/account/cart/CheckoutForm";
 
-export default function CheckoutPage() {
+function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState<Cart | null>(null);
   const [zones, setZones] = useState<Zone[]>([]);
@@ -102,15 +103,13 @@ export default function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Ensure this runs only on the client
     const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // ✅ Safe localStorage access in useEffect
-        const token =
-          typeof window !== "undefined" ? localStorage.getItem("token") : null;
+        // Check for authentication token in localStorage (only runs on client)
+        const token = localStorage.getItem("token");
         if (!token) {
           router.push("/login");
           return;
@@ -175,3 +174,5 @@ export default function CheckoutPage() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(CheckoutPage), { ssr: false });
