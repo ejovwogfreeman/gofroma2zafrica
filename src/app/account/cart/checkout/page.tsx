@@ -64,9 +64,9 @@ export default function CheckoutPage() {
         // Safe localStorage access
         let token = null;
 
-        if (typeof window !== "undefined") {
-          token = localStorage.getItem("token");
-        }
+        // if (typeof window !== "undefined") {
+        //   token = localStorage.getItem("token");
+        // }
 
         if (!token) {
           router.push("/login");
@@ -84,9 +84,9 @@ export default function CheckoutPage() {
         setZones(zonesData);
       } catch (err) {
         if (err instanceof Error && err.message.includes("Invalid token")) {
-          if (typeof window !== "undefined") {
-            localStorage.removeItem("token");
-          }
+          // if (typeof window !== "undefined") {
+          //   localStorage.removeItem("token");
+          // }
           router.push("/login");
         } else {
           setError(
