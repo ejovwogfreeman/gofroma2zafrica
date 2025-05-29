@@ -62,8 +62,11 @@ export default function CheckoutPage() {
         setError(null);
 
         // Safe localStorage access
-        const token =
-          typeof window !== "undefined" ? localStorage.getItem("token") : null;
+        let token = null;
+
+        if (typeof window !== "undefined") {
+          token = localStorage.getItem("token");
+        }
 
         if (!token) {
           router.push("/login");
