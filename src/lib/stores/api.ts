@@ -953,3 +953,66 @@ export async function updatePaymentDetails(
     throw error;
   }
 }
+
+export async function openMyStore(): Promise<Store> {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Authentication required");
+  }
+
+  try {
+    const response = await fetchWithRetry(
+      `${API_URL}/api/stores/my-store/open`,
+      {
+        method: "PATCH", // <-- This is essential
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Failed to fetch store");
+    }
+
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching store:", error);
+    throw error;
+  }
+}
+export async function closeMyStore(): Promise<Store> {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Authentication required");
+  }
+
+  try {
+    const response = await fetchWithRetry(
+      `${API_URL}/api/stores/my-store/close`,
+      {
+        method: "PATCH", // <-- This is essential
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.message || "Failed to fetch store");
+    }
+
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching store:", error);
+    throw error;
+  }
+}

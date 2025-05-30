@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import DashboardStats from "@/components/dashboard/stats/DashboardStats";
 import React from "react";
+import { openMyStore, closeMyStore, getMyStore } from "@/lib/stores/api";
 
 interface StoreData {
   _id: string;
+  isOpen: boolean;
   storeName: string;
   description: string;
   category: string;
@@ -39,6 +41,11 @@ export default function DashboardPage() {
   const [storeData, setStoreData] = useState<StoreData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [storeIsOpen, setStoreIsOpen] = useState<boolean | null>(null);
+  const [storeLoading, setStoreLoading] = useState(false);
+  const [storeMessage, setStoreMessage] = useState<string | null>(null);
+  const [storeError, setStoreError] = useState<string | null>(null);
 
   useEffect(() => {
     const checkStore = async () => {
@@ -265,19 +272,80 @@ export default function DashboardPage() {
     );
   }
 
-  // Show dashboard if store exists
+  const checkAndToggleStore = async () => {
+    setStoreLoading(true);
+    setStoreError(null);
+    setStoreMessage(null);
+
+    try {
+      const isCurrentlyOpen = storeData?.isOpen;
+
+      if (isCurrentlyOpen) {
+        await closeMyStore();
+        setStoreMessage("Store was open and has now been closed.");
+        setStoreIsOpen(false);
+        setStoreData((prev) => (prev ? { ...prev, isOpen: false } : prev));
+      } else {
+        await openMyStore();
+        setStoreMessage("Store was closed and has now been opened.");
+        setStoreIsOpen(true);
+        setStoreData((prev) => (prev ? { ...prev, isOpen: true } : prev));
+      }
+    } catch (err: any) {
+      setStoreError(err.message || "Failed to toggle store based on status");
+    } finally {
+      setStoreLoading(false);
+    }
+  };
+
   return (
     <div className="p-6">
-      {/* <h1 className="text-2xl font-bold mb-8">
-        {storeData?.storeName} Dashboard
-      </h1> */}
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold">{storeData?.storeName} Dashboard</h1>
-        <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition disabled:opacity-50">
-          OPEN STORE
+
+        <span
+          className={`inline-block px-4 py-1 rounded-full text-white text-sm font-semibold ${
+            storeLoading || !storeData
+              ? "bg-gray-500"
+              : storeIsOpen
+              ? "bg-green-600"
+              : "bg-red-600"
+          }`}
+        >
+          {storeLoading
+            ? "Checking store status..."
+            : !storeData
+            ? "Loading store status..."
+            : storeIsOpen
+            ? "OPEN"
+            : "CLOSED"}
+        </span>
+      </div>
+
+      <DashboardStats />
+
+      <div className="mt-5">
+        <button
+          onClick={checkAndToggleStore}
+          disabled={storeLoading || !storeData}
+          className={`px-4 py-2 text-white rounded transition disabled:opacity-50 ${
+            storeLoading || !storeData
+              ? "bg-gray-500 cursor-not-allowed"
+              : storeIsOpen
+              ? "bg-red-600 hover:bg-red-700"
+              : "bg-green-600 hover:bg-green-700"
+          }`}
+        >
+          {storeLoading
+            ? "LOADING..."
+            : !storeData
+            ? "Loading store status..."
+            : storeIsOpen
+            ? "CLOSE STORE"
+            : "OPEN STORE"}
         </button>
       </div>
-      <DashboardStats />
+
       <a
         href="https://wa.me/+2347066096155"
         style={{
