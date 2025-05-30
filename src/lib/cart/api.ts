@@ -45,33 +45,6 @@ export async function getCart(): Promise<Cart> {
   }
 }
 
-const getHeadersOnServer = (token: string) => {
-  return {
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
-  };
-};
-
-export async function getCartOnServer(token: string): Promise<Cart> {
-  try {
-    const response = await fetch(`${API_URL}/api/cart`, {
-      headers: getHeadersOnServer(token),
-      cache: "no-store",
-    });
-
-    const data: CartResponse = await response.json();
-
-    if (!data.success) {
-      throw new Error(data.message || "Failed to fetch cart");
-    }
-
-    return data.data;
-  } catch (error) {
-    console.error("Error fetching cart:", error);
-    throw error;
-  }
-}
-
 export async function addToCart(cartData: AddToCartData): Promise<Cart> {
   try {
     const response = await fetch(`${API_URL}/api/cart/items`, {
