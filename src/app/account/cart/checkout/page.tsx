@@ -90,9 +90,10 @@
 
 import dynamic from "next/dynamic";
 
-const CheckoutClient = dynamic(() => import("./CheckoutClient"), {
-  ssr: false,
-});
+// const CheckoutClient = dynamic(() => import("./CheckoutClient"), {
+//   ssr: false,
+// });
+const CheckoutClient = dynamic(() => import("./CheckoutClient"));
 
 export default function CheckoutPage() {
   return <CheckoutClient />;
