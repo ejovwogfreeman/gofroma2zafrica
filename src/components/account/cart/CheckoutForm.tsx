@@ -92,9 +92,6 @@ export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
         JSON.stringify(orderData, null, 2)
       );
 
-      // const token =
-      //   typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_API_URL ||
@@ -104,7 +101,7 @@ export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(orderData),
         }

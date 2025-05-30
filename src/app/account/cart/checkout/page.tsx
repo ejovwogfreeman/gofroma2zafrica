@@ -21,8 +21,7 @@ export default function CheckoutPage() {
         setError(null);
 
         // Check for authentication
-        // const token = localStorage.getItem("token");
-        let token = null;
+        const token = localStorage.getItem("token");
         if (!token) {
           router.push("/login");
           return;
@@ -41,7 +40,7 @@ export default function CheckoutPage() {
         setZones(zonesData);
       } catch (err) {
         if (err instanceof Error && err.message.includes("Invalid token")) {
-          // localStorage.removeItem("token");
+          localStorage.removeItem("token");
           router.push("/login");
         } else {
           setError(

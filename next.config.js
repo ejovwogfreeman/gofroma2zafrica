@@ -28,7 +28,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
         pathname: "/**",
-      }
+      },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
@@ -36,8 +36,8 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: false,
-    loader: 'default',
-    domains: ['res.cloudinary.com', 'picsum.photos'],
+    loader: "default",
+    domains: ["res.cloudinary.com", "picsum.photos"],
   },
 };
 

@@ -1,8 +1,14 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import { Cart } from "@/lib/cart/types";
-import { addToCart, updateCartItem, removeCartItem, clearCart, getCart } from "@/lib/cart/api";
+import {
+  addToCart,
+  updateCartItem,
+  removeCartItem,
+  clearCart,
+  getCart,
+} from "@/lib/cart/api";
 import CartList from "./CartList";
 import CartSummary from "./CartSummary";
 import EmptyCart from "./EmptyCart";
@@ -20,7 +26,7 @@ export default function CartClient() {
         setLoading(true);
         setError(null);
         const token = localStorage.getItem("token");
-        
+
         if (!token) {
           router.push("/login");
           return;
@@ -55,7 +61,9 @@ export default function CartClient() {
         localStorage.removeItem("token");
         router.push("/login");
       } else {
-        setError(err instanceof Error ? err.message : "Failed to add item to cart");
+        setError(
+          err instanceof Error ? err.message : "Failed to add item to cart"
+        );
       }
     } finally {
       setLoading(false);
@@ -73,7 +81,9 @@ export default function CartClient() {
         localStorage.removeItem("token");
         router.push("/login");
       } else {
-        setError(err instanceof Error ? err.message : "Failed to update cart item");
+        setError(
+          err instanceof Error ? err.message : "Failed to update cart item"
+        );
       }
     } finally {
       setLoading(false);
@@ -91,7 +101,9 @@ export default function CartClient() {
         localStorage.removeItem("token");
         router.push("/login");
       } else {
-        setError(err instanceof Error ? err.message : "Failed to remove item from cart");
+        setError(
+          err instanceof Error ? err.message : "Failed to remove item from cart"
+        );
       }
     } finally {
       setLoading(false);
@@ -118,7 +130,7 @@ export default function CartClient() {
 
   const handleCheckout = () => {
     if (!cart || cart.items.length === 0) return;
-    router.push('/account/cart/checkout');
+    router.push("/account/cart/checkout");
   };
 
   if (loading) {
@@ -126,11 +138,7 @@ export default function CartClient() {
   }
 
   if (error) {
-    return (
-      <div className="bg-red-50 text-red-500 p-4 rounded-md">
-        {error}
-      </div>
-    );
+    return <div className="bg-red-50 text-red-500 p-4 rounded-md">{error}</div>;
   }
 
   if (!cart || cart.items.length === 0) {
@@ -158,4 +166,4 @@ export default function CartClient() {
       </div>
     </div>
   );
-} 
+}
