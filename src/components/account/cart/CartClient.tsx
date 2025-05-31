@@ -25,7 +25,9 @@ export default function CartClient() {
       try {
         setLoading(true);
         setError(null);
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
+        const token =
+          typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
         if (!token) {
           router.push("/login");
