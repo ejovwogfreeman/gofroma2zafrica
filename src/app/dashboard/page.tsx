@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import DashboardStats from "@/components/dashboard/stats/DashboardStats";
@@ -47,171 +47,207 @@ export default function DashboardPage() {
   const [storeMessage, setStoreMessage] = useState<string | null>(null);
   const [storeError, setStoreError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const checkStore = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
+  // useEffect(() => {
+  //   const checkStore = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       if (!token) return;
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/stores/my-store`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  //       const response = await fetch(
+  //         `${process.env.NEXT_PUBLIC_API_URL}/api/stores/my-store`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
 
-        const data = await response.json();
-        console.log("Store check response:", data);
+  //       const data = await response.json();
+  //       console.log("Store check response:", data);
 
-        if (response.ok && data.success) {
-          setStoreData(data.data);
-        } else {
-          setStoreData(null);
+  //       if (response.ok && data.success) {
+  //         setStoreData(data.data);
+  //         return data.data;
+  //       } else {
+  //         setStoreData(null);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking store:", error);
+  //       setError("Failed to load store data");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   checkStore();
+  // }, []);
+
+  // const handleUpdateStore = async (updateData: Partial<StoreData>) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) {
+  //       setError("Authentication token not found");
+  //       return;
+  //     }
+
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/api/stores`,
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify(updateData),
+  //       }
+  //     );
+
+  //     const data = await response.json();
+  //     if (response.ok && data.success) {
+  //       setStoreData(data.data);
+  //     } else {
+  //       setError(data.message || "Failed to update store");
+  //     }
+  //   } catch (err) {
+  //     console.error("Store update error:", err);
+  //     setError("Failed to update store");
+  //   }
+  // };
+
+  // const handleDeleteStore = async () => {
+  //   if (
+  //     !window.confirm(
+  //       "Are you sure you want to delete your store? This action cannot be undone."
+  //     )
+  //   ) {
+  //     return;
+  //   }
+
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) {
+  //       setError("Authentication token not found");
+  //       return;
+  //     }
+
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/api/stores`,
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       router.push("/dashboard/create-store");
+  //     } else {
+  //       const data = await response.json();
+  //       setError(data.message || "Failed to delete store");
+  //     }
+  //   } catch (err) {
+  //     console.error("Store deletion error:", err);
+  //     setError("Failed to delete store");
+  //   }
+  // };
+
+  // const handleUpdateSettings = async (settings: any) => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) {
+  //       setError("Authentication token not found");
+  //       return;
+  //     }
+
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/api/stores/settings`,
+  //       {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({ settings }),
+  //       }
+  //     );
+
+  //     const data = await response.json();
+  //     if (response.ok && data.success) {
+  //       setStoreData(data.data);
+  //     } else {
+  //       setError(data.message || "Failed to update settings");
+  //     }
+  //   } catch (err) {
+  //     console.error("Settings update error:", err);
+  //     setError("Failed to update settings");
+  //   }
+  // };
+
+  // const handleActivateStore = async () => {
+  //   try {
+  //     const token = localStorage.getItem("token");
+  //     if (!token) {
+  //       setError("Authentication token not found");
+  //       return;
+  //     }
+
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/api/stores/activate`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     const data = await response.json();
+  //     if (response.ok && data.success) {
+  //       setStoreData(data.data);
+  //     } else {
+  //       setError(data.message || "Failed to activate store");
+  //     }
+  //   } catch (err) {
+  //     console.error("Store activation error:", err);
+  //     setError("Failed to activate store");
+  //   }
+  // };
+
+  const checkStore = useCallback(async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/stores/my-store`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      } catch (error) {
-        console.error("Error checking store:", error);
-        setError("Failed to load store data");
-      } finally {
-        setLoading(false);
-      }
-    };
+      );
 
-    checkStore();
+      const data = await response.json();
+      console.log("Store check response:", data);
+
+      if (response.ok && data.success) {
+        setStoreData(data.data);
+        setStoreIsOpen(data.data.isOpen); // Sync isOpen with fetched data
+        return data.data;
+      } else {
+        setStoreData(null);
+      }
+    } catch (error) {
+      console.error("Error checking store:", error);
+      setError("Failed to load store data");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const handleUpdateStore = async (updateData: Partial<StoreData>) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("Authentication token not found");
-        return;
-      }
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/stores`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(updateData),
-        }
-      );
-
-      const data = await response.json();
-      if (response.ok && data.success) {
-        setStoreData(data.data);
-      } else {
-        setError(data.message || "Failed to update store");
-      }
-    } catch (err) {
-      console.error("Store update error:", err);
-      setError("Failed to update store");
-    }
-  };
-
-  const handleDeleteStore = async () => {
-    if (
-      !window.confirm(
-        "Are you sure you want to delete your store? This action cannot be undone."
-      )
-    ) {
-      return;
-    }
-
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("Authentication token not found");
-        return;
-      }
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/stores`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        router.push("/dashboard/create-store");
-      } else {
-        const data = await response.json();
-        setError(data.message || "Failed to delete store");
-      }
-    } catch (err) {
-      console.error("Store deletion error:", err);
-      setError("Failed to delete store");
-    }
-  };
-
-  const handleUpdateSettings = async (settings: any) => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("Authentication token not found");
-        return;
-      }
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/stores/settings`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ settings }),
-        }
-      );
-
-      const data = await response.json();
-      if (response.ok && data.success) {
-        setStoreData(data.data);
-      } else {
-        setError(data.message || "Failed to update settings");
-      }
-    } catch (err) {
-      console.error("Settings update error:", err);
-      setError("Failed to update settings");
-    }
-  };
-
-  const handleActivateStore = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setError("Authentication token not found");
-        return;
-      }
-
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/stores/activate`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      const data = await response.json();
-      if (response.ok && data.success) {
-        setStoreData(data.data);
-      } else {
-        setError(data.message || "Failed to activate store");
-      }
-    } catch (err) {
-      console.error("Store activation error:", err);
-      setError("Failed to activate store");
-    }
-  };
+  useEffect(() => {
+    checkStore();
+  }, [checkStore]);
 
   const fetchStoreMetrics = async () => {
     try {
@@ -278,15 +314,16 @@ export default function DashboardPage() {
     setStoreMessage(null);
 
     try {
-      const isCurrentlyOpen = storeData?.isOpen;
+      const latestStoreData = await checkStore();
+      const isCurrentlyOpen = latestStoreData?.isOpen;
 
       if (isCurrentlyOpen) {
-        await closeMyStore();
+        await closeMyStore(); // Assumes this is an API call
         setStoreMessage("Store was open and has now been closed.");
         setStoreIsOpen(false);
         setStoreData((prev) => (prev ? { ...prev, isOpen: false } : prev));
       } else {
-        await openMyStore();
+        await openMyStore(); // Assumes this is an API call
         setStoreMessage("Store was closed and has now been opened.");
         setStoreIsOpen(true);
         setStoreData((prev) => (prev ? { ...prev, isOpen: true } : prev));
