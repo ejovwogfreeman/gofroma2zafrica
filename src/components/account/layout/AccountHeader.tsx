@@ -13,6 +13,9 @@ export default function AccountHeader({
 
   // const token = localStorage.getItem("token");
 
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userType");
@@ -25,7 +28,7 @@ export default function AccountHeader({
         {/* Left: Hamburger Menu & Logo */}
         <div className="flex items-center space-x-4">
           {/* Menu Button */}
-          {/* {token ? (
+          {token ? (
             <button onClick={toggleNav} className="p-2 focus:outline-none">
               <span className="block w-6 h-0.5 bg-gray-800 mb-1"></span>
               <span className="block w-6 h-0.5 bg-gray-800 mb-1"></span>
@@ -39,7 +42,7 @@ export default function AccountHeader({
             >
               <span aria-hidden="true">&#8592; Go back</span>
             </Link>
-          )} */}
+          )}
           {/* <span className="text-gray-900 font-medium">Account Dashboard</span> */}
           <span
             className="text-gray-900 font-medium"
@@ -51,14 +54,14 @@ export default function AccountHeader({
 
         {/* Right: Navigation Links */}
         <div className="flex items-center space-x-4">
-          {/* {token && (
+          {token && (
             <button
               onClick={handleLogout}
               className="text-gray-600 hover:text-gold-primary transition-colors"
             >
               Logout
             </button>
-          )} */}
+          )}
         </div>
       </div>
     </header>

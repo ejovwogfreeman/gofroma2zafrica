@@ -37,6 +37,9 @@ export default function AccountLayout({
 
   // let token = localStorage.getItem("token");
 
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Header */}
@@ -44,14 +47,14 @@ export default function AccountLayout({
 
       <div className="flex flex-1">
         {/* Sidebar */}
-        {/* {token && (
+        {token && (
           <aside
             className={`w-64 bg-white border-r border-gray-200 fixed h-[calc(100vh-64px)] top-16 left-0 z-30 transform transition-transform duration-300 ease-in-out
             ${isNavOpen ? "translate-x-0" : "-translate-x-64"}`}
           >
             <AccountNav />
           </aside>
-        )} */}
+        )}
 
         {/* Main Content */}
         <main
