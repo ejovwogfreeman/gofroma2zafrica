@@ -15,6 +15,5 @@ export default function CartPage() {
     }
   }, [router]);
 
-  return <div>test</div>;
-  // return <CartClient />;
+  return <CartClient />;
 }
