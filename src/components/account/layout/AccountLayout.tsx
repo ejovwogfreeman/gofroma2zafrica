@@ -21,7 +21,9 @@ export default function AccountLayout({
       return;
     }
 
-    const token = localStorage.getItem("token");
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
     const userType = localStorage.getItem("userType");
 
     if (!token || userType !== "consumer") {
