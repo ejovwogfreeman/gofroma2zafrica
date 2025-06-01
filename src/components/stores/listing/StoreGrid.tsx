@@ -45,14 +45,9 @@ const StoreGrid = memo(function StoreGrid({
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* {stores.map((store) => (
+        {stores.map((store) => (
           <StoreCard key={store._id} store={store} />
-        ))} */}
-        {stores
-          .filter((store) => store.isOpen) // ✅ Only include open stores
-          .map((store) => (
-            <StoreCard key={store._id} store={store} />
-          ))}
+        ))}
       </div>
       {/* Load More */}
       {hasMore && (
