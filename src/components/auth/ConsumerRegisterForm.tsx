@@ -311,7 +311,7 @@ export default function ConsumerRegisterForm() {
           >
             {status === "loading" ? "Verifying..." : "Verify Email"}
           </button>
-          {message && (
+          {/* {message && (
             <p
               className={`text-sm ${
                 status === "success" ? "text-green-400" : "text-red-400"
@@ -319,7 +319,7 @@ export default function ConsumerRegisterForm() {
             >
               {message}
             </p>
-          )}
+          )} */}
         </motion.form>
       )}
 
