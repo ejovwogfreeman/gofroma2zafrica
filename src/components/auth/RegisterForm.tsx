@@ -208,7 +208,7 @@ export default function RegisterForm() {
           <SubmitButton status={status} text="Register Now" />
 
           {/* Status Message */}
-          <StatusMessage status={status} message={message} />
+          {/* <StatusMessage status={status} message={message} /> */}
         </motion.form>
       ) : (
         /* OTP Verification Form */
@@ -219,6 +219,8 @@ export default function RegisterForm() {
           onSubmit={handleVerifyOtp}
           className="space-y-6 bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10"
         >
+          {" "}
+          <StatusMessage status={status} message={message} />
           <div>
             <label htmlFor="otp" className="block text-dark mb-2">
               Enter Verification Code
@@ -236,10 +238,8 @@ export default function RegisterForm() {
               required
             />
           </div>
-
           {/* Submit Button */}
           <SubmitButton status={status} text="Verify Email" />
-
           {/* Status Message */}
           {/* <StatusMessage status={status} message={message} /> */}
         </motion.form>

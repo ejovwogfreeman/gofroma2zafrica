@@ -268,6 +268,18 @@ export default function ConsumerRegisterForm() {
           onSubmit={handleVerifyOtp}
           className="space-y-6 bg-dark-primary/50 backdrop-blur-sm p-8 rounded-lg border border-white/10"
         >
+          {" "}
+          {message && (
+            <p
+              className={`p-2 rounded ${
+                status === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {message}
+            </p>
+          )}
           <div>
             <label htmlFor="otp" className="block text-dark mb-2">
               Enter Verification Code
@@ -285,7 +297,6 @@ export default function ConsumerRegisterForm() {
               required
             />
           </div>
-
           <button
             type="submit"
             disabled={status === "loading"}
@@ -300,7 +311,6 @@ export default function ConsumerRegisterForm() {
           >
             {status === "loading" ? "Verifying..." : "Verify Email"}
           </button>
-
           {message && (
             <p
               className={`text-sm ${
