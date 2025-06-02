@@ -14,6 +14,16 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
   const [confirming, setConfirming] = useState(false);
   const [error, setError] = useState("");
 
+  const [copied, setCopied] = useState(false);
+  const accountNumber = "8284145223";
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(accountNumber).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   useEffect(() => {
     async function fetchOrder() {
       try {
@@ -137,16 +147,29 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
               {/* <span className="font-bold">Bank:</span> {bankDetails.bankName} */}
               <span className="font-bold">Bank:</span>Moniepoint
             </p>
+            {/* <span className="font-bold">Account Name:</span> {bankDetails.accountName} */}
+            {/* {bankDetails.accountName} */}
             <p className="text-white">
-              {/* <span className="font-bold">Account Name:</span> {bankDetails.accountName} */}
               <span className="font-bold">Account Name:</span>Alpha Interactive
               Tech Hub Nig/usele freedom oghenekeno
-              {bankDetails.accountName}
             </p>
-            <p className="text-white">
-              {/* <span className="font-bold">Account Number:</span> {bankDetails.accountNumber} */}
-              <span className="font-bold">Account Number:</span> 8284145223
-            </p>
+            {/* <span className="font-bold">Account Number:</span> {bankDetails.accountNumber} */}
+            {/* <p className="text-white">
+              <span className="font-bold">Account Number:</span>{" "}
+              <span>8284145223</span>
+            </p> */}
+            <div className="flex items-center space-x-2 text-white">
+              <p className="m-0">
+                <span className="font-bold">Account Number:</span>{" "}
+                <span>{accountNumber}</span>
+              </p>
+              <button
+                onClick={copyToClipboard}
+                className="bg-blue-600 px-2 py-1 rounded text-sm hover:bg-blue-700"
+              >
+                {copied ? "Copied!" : "Copy"}
+              </button>
+            </div>
           </div>
         </div>
 
