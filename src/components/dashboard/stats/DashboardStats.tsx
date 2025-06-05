@@ -174,7 +174,8 @@ export default function DashboardStats() {
           <div className="space-y-4">
             {dashboardData.topProducts.map((product) => (
               <div
-                key={product._id}
+                // key={product._id}
+                key={Math.random()}
                 className="flex justify-between items-center"
               >
                 <div>

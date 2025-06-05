@@ -8,9 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function TopNav({
   toggleSidebar,
   storeName,
+  newOrderNotification,
 }: {
   toggleSidebar: () => void;
   storeName?: string;
+  newOrderNotification?: boolean;
 }) {
   const router = useRouter();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -39,6 +41,14 @@ export default function TopNav({
 
         {/* Right Section (Profile) */}
         <div className="flex items-center space-x-4">
+          {newOrderNotification && (
+            <Link
+              href="/dashboard/orders"
+              className="bg-red-600 text-white text-xs font-semibold px-2 py-1 rounded"
+            >
+              New Order
+            </Link>
+          )}
           <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
             className="relative"
