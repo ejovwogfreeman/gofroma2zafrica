@@ -47,8 +47,8 @@ const ProductFilters = memo(function ProductFilters({
   );
 
   return (
-    <div className="bg-black/5 p-4 rounded-lg shadow-md border border-gold-primary/20 space-y-4">
-      <div className="flex flex-col sm:flex-row gap-4">
+    <div className="bg-black/5 p-3 sm:p-4 rounded-lg shadow-md border border-gold-primary/20 space-y-3 sm:space-y-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
         <div className="flex-1">
           <div className="relative">
             <input
@@ -56,12 +56,12 @@ const ProductFilters = memo(function ProductFilters({
               value={searchTerm}
               onChange={handleSearchChange}
               placeholder="Search products..."
-              className="w-full pl-10 pr-4 py-2 bg-black/5 border-gold-primary/20 border rounded-lg 
+              className="w-full pl-10 pr-4 py-2 text-sm sm:text-base bg-black/5 border-gold-primary/20 border rounded-lg 
                 focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-gold-primary
                 text-light-800 placeholder-gray-500"
             />
             <svg
-              className="absolute left-3 top-2.5 h-5 w-5 text-gold-primary"
+              className="absolute left-3 top-2.5 h-4 w-4 sm:h-5 sm:w-5 text-gold-primary"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -76,13 +76,13 @@ const ProductFilters = memo(function ProductFilters({
           </div>
         </div>
 
-        <div className="sm:w-48">
+        <div className="grid grid-cols-2 gap-3 sm:flex sm:gap-4">
           <select
             value={filters.status || ""}
             onChange={handleStatusChange}
-            className="w-full px-4 py-2 bg-black/5 border-gold-primary/20 border rounded-lg 
+            className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base bg-black/5 border-gold-primary/20 border rounded-lg 
               focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-gold-primary
-              text-light-800"
+              text-light-800 sm:w-48"
           >
             <option value="" className="">
               All Status
@@ -93,15 +93,13 @@ const ProductFilters = memo(function ProductFilters({
               </option>
             ))}
           </select>
-        </div>
 
-        <div className="sm:w-48">
           <select
             value={filters.category || ""}
             onChange={handleCategoryChange}
-            className="w-full px-4 py-2 bg-black/5 border-gold-primary/20 border rounded-lg 
+            className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base bg-black/5 border-gold-primary/20 border rounded-lg 
               focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-gold-primary
-              text-light-800"
+              text-light-800 sm:w-48"
           >
             <option value="" className="">
               All Categories

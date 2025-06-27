@@ -44,9 +44,8 @@ export default function ConsumerRegisterForm() {
 
       if (response.ok) {
         setStatus("success");
-        // setMessage(data.message);
         setMessage(
-          "Registration successful. Please check your email or spam folder for a verification code."
+          "Registration successful! We've sent a verification code to your email. Please check both your inbox and spam/junk folders. If you don't see it within a few minutes, please check your spam/junk folder as sometimes our emails may end up there."
         );
         setConsumerId(data.consumerId);
         setShowOtpForm(true);

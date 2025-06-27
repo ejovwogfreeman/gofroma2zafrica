@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function RegisterForm() {
     name: "",
     phone: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -41,9 +43,8 @@ export default function RegisterForm() {
 
       if (response.ok) {
         setStatus("success");
-        // setMessage(data.message);
         setMessage(
-          "Registration successful. Please check your email or spam folder for a verification code."
+          "Registration successful! We've sent a verification code to your email. Please check both your inbox and spam/junk folders. If you don't see it within a few minutes, please check your spam/junk folder as sometimes our emails may end up there."
         );
         setUserId(data.userId);
         setShowOtpForm(true);

@@ -142,61 +142,58 @@ export default function ProductCard({
         className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
       >
         {/* Product Image */}
-        <div className="relative h-48 bg-gray-100">
+        <div className="relative h-40 sm:h-48 bg-gray-100">
           {imageUrl && (
             <Image
               src={imageUrl}
               alt={product.name}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
               className={`object-cover transition-opacity duration-300 ${
                 imageLoaded ? "opacity-100" : "opacity-0"
               }`}
-              onLoadingComplete={() => {
-                setIsImageLoading(false);
-                setImageLoaded(true);
-              }}
+              onLoadingComplete={handleImageLoad}
               onError={handleImageError}
               priority={true}
             />
           )}
           {isImageLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gold-primary" />
+              <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-gold-primary" />
             </div>
           )}
           {imageError && (
-            <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+            <div className="absolute inset-0 flex items-center justify-center text-sm sm:text-base text-gray-400">
               Failed to load image
             </div>
           )}
         </div>
 
         {/* Product Info */}
-        <div className="p-4 space-y-3">
+        <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
           <h3
-            className="font-semibold text-lg truncate text-gray-900"
+            className="font-semibold text-base sm:text-lg truncate text-gray-900"
             title={product.name}
           >
             {product.name}
           </h3>
 
           <p
-            className="text-gray-700 text-sm line-clamp-2"
+            className="text-gray-700 text-sm sm:text-base line-clamp-2"
             title={product.description}
           >
             {product.description}
           </p>
 
           <div className="flex justify-between items-center">
-            <span className="text-lg font-bold text-gold-primary">
+            <span className="text-base sm:text-lg font-bold text-gold-primary">
               ₦
               {product.price.toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </span>
-            <span className="text-sm text-gray-700">
+            <span className="text-xs sm:text-sm text-gray-700">
               {product.stock > 0
                 ? `In Stock (${product.stock})`
                 : "Out of Stock"}
@@ -208,7 +205,7 @@ export default function ProductCard({
             <div className="flex items-center space-x-2">
               <label
                 htmlFor={`quantity-${product._id}`}
-                className="text-sm text-gray-700"
+                className="text-xs sm:text-sm text-gray-700"
               >
                 Quantity:
               </label>
@@ -216,7 +213,7 @@ export default function ProductCard({
                 id={`quantity-${product._id}`}
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                className="px-2 py-1 border border-gray-300 rounded-md text-sm"
+                className="px-1 sm:px-2 py-1 border border-gray-300 rounded-md text-xs sm:text-sm"
               >
                 {[...Array(Math.min(product.stock, 10))].map((_, i) => (
                   <option key={i + 1} value={i + 1}>
@@ -233,28 +230,31 @@ export default function ProductCard({
               onClick={handleAddToCart}
               disabled={addingToCart || product.stock === 0}
               className="w-full bg-gold-primary text-white py-2 rounded hover:bg-gold-secondary 
-                transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium
+                text-sm sm:text-base"
             >
               {addingToCart ? "Adding..." : "Add to Cart"}
             </button>
             <button
               onClick={() => setShowOrderForm(true)}
               className="w-full border border-gold-primary text-gold-primary py-2 rounded 
-                hover:bg-gold-primary/10 transition-colors font-medium"
+                hover:bg-gold-primary/10 transition-colors font-medium
+                text-sm sm:text-base"
             >
               Order Now
             </button>
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm text-center">{error}</div>
+            <div className="text-red-500 text-xs sm:text-sm text-center">{error}</div>
           )}
         </div>
       </div>
 
+      {/* Order Form Modal */}
       {showOrderForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto">
             <OrderForm
               storeId={storeId}
               storeSlug={storeSlug}

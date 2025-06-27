@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -140,20 +142,29 @@ export default function LoginForm() {
           <label htmlFor="password" className="block text-dark mb-2">
             Password
           </label>
-          <input
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={(e) =>
-              setFormData({ ...formData, password: e.target.value })
-            }
-            className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
-              text-dark placeholder:text-gray-400
-              focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent
-              hover:border-gold-primary/50
-              transition-all duration-300"
-            required
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+              className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
+                text-dark placeholder:text-gray-400
+                focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent
+                hover:border-gold-primary/50
+                transition-all duration-300"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Submit Button */}

@@ -147,12 +147,12 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
       className="bg-black/5 rounded-lg shadow-md overflow-hidden border border-gold-primary/20 hover:border-gold-primary transition-all hover:shadow-lg"
     >
       {/* Product Image */}
-      <div className="relative h-48 bg-black/10">
+      <div className="relative h-32 sm:h-48 bg-black/10">
         {imageUrl ? (
           <>
             {isImageLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/5 z-10">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gold-primary"></div>
+                <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-gold-primary"></div>
               </div>
             )}
             <div className={`relative h-full transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}>
@@ -160,7 +160,7 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
                 src={imageUrl}
                 alt={product.name}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 768px) 50vw, 33vw"
                 className="object-cover"
                 onLoad={handleImageLoad}
                 onError={handleImageError}
@@ -172,7 +172,7 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
         ) : (
           <div className="flex items-center justify-center h-full text-light-600">
             <div className="text-center">
-              <span className="block">
+              <span className="block text-sm sm:text-base">
                 {imageError ? 'Failed to load image' : 'No image available'}
               </span>
             </div>
@@ -181,7 +181,7 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
 
         {/* Status Badge */}
         <div
-          className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+          className={`absolute top-2 right-2 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${getStatusColor(
             product.status
           )}`}
         >
@@ -190,38 +190,38 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
       </div>
 
       {/* Product Info */}
-      <div className="p-4 space-y-2">
+      <div className="p-2 sm:p-4 space-y-2 sm:space-y-3">
         <h3
-          className="font-semibold text-lg truncate text-light-900"
+          className="font-semibold text-base sm:text-lg truncate text-light-900"
           title={product.name}
         >
           {product.name}
         </h3>
 
         <p
-          className="text-light-700 text-sm line-clamp-2"
+          className="text-xs sm:text-sm text-light-700 line-clamp-2"
           title={product.description}
         >
           {product.description}
         </p>
 
         <div className="flex justify-between items-center">
-          <span className="text-lg font-bold text-gold-primary">
+          <span className="text-base sm:text-lg font-bold text-gold-primary">
             ₦
             {product.price.toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           </span>
-          <span className="text-sm text-light-700">Stock: {product.stock}</span>
+          <span className="text-xs sm:text-sm text-light-700">Stock: {product.stock}</span>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-between items-center pt-3 border-t border-gold-primary/10">
+        <div className="flex justify-between items-center pt-2 sm:pt-3 border-t border-gold-primary/10">
           <button
             onClick={togglePublished}
             disabled={isUpdating}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`px-2 sm:px-3 py-1 rounded text-xs sm:text-sm transition-colors ${
               product.isPublished
                 ? "bg-gold-primary text-white hover:bg-gold-secondary"
                 : "bg-gray-800 text-white hover:bg-gray-700"
@@ -234,14 +234,14 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
               : "Draft"}
           </button>
 
-          <div className="flex gap-2">
+          <div className="flex gap-1 sm:gap-2">
             <button
               onClick={handleEdit}
-              className="p-2 text-gold-primary hover:bg-gold-primary/10 rounded transition-colors"
+              className="p-1.5 sm:p-2 text-gold-primary hover:bg-gold-primary/10 rounded transition-colors"
             >
               <span className="sr-only">Edit</span>
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -258,11 +258,11 @@ export default function ProductCard({ product, onDelete }: ProductCardProps) {
             <button
               onClick={handleDelete}
               disabled={isDeleting}
-              className="p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
+              className="p-1.5 sm:p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
             >
               <span className="sr-only">Delete</span>
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4 sm:w-5 sm:h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

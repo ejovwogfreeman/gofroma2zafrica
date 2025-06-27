@@ -124,18 +124,18 @@ export default function OrderForm({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-2xl mx-auto bg-gray-900 p-8 rounded-lg border-2 border-gray-700"
+      className="max-w-2xl mx-auto bg-gray-900 p-4 sm:p-8 rounded-lg border-2 border-gray-700"
     >
-      <h2 className="text-3xl font-bold text-gold-primary mb-8">Place Order</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold text-gold-primary mb-6 sm:mb-8">Place Order</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
         {/* Package Details */}
-        <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-gold-primary">Package Details</h3>
+        <div className="space-y-4 sm:space-y-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-gold-primary">Package Details</h3>
           
           {/* Zone Selection */}
           <div>
-            <label htmlFor="zone" className="block text-lg font-bold text-white mb-2">
+            <label htmlFor="zone" className="block text-base sm:text-lg font-bold text-white mb-2">
               Delivery Zone
             </label>
             <select
@@ -147,12 +147,12 @@ export default function OrderForm({
                 setSelectedZone(zone || null);
               }}
               required
-              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
             >
               <option value="">Select a delivery zone</option>
               {zones.map((zone) => (
-                <option key={zone._id} value={zone._id} className="text-xl">
+                <option key={zone._id} value={zone._id} className="text-base sm:text-xl">
                   {zone.name} - ₦{zone.deliveryPrice.toLocaleString()}
                 </option>
               ))}
@@ -161,15 +161,15 @@ export default function OrderForm({
 
           {/* Package Size */}
           <div>
-            <label htmlFor="packageSize" className="block text-lg font-bold text-white mb-2">
+            <label htmlFor="packageSize" className="block text-base sm:text-lg font-bold text-white mb-2">
               Package Size
             </label>
             <select
               id="packageSize"
               name="packageSize"
               required
-              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
             >
               <option value="SMALL">Small</option>
               <option value="MEDIUM">Medium</option>
@@ -178,16 +178,16 @@ export default function OrderForm({
           </div>
 
           {/* Package Options */}
-          <div className="flex space-x-6">
+          <div className="flex flex-col sm:flex-row gap-4 sm:space-x-6">
             <div className="flex items-center">
               <input
                 type="checkbox"
                 id="isFragile"
                 name="isFragile"
                 value="true"
-                className="h-5 w-5 text-gold-primary focus:ring-gold-primary"
+                className="h-4 w-4 sm:h-5 sm:w-5 text-gold-primary focus:ring-gold-primary"
               />
-              <label htmlFor="isFragile" className="ml-2 text-lg font-semibold text-white">
+              <label htmlFor="isFragile" className="ml-2 text-sm sm:text-lg font-semibold text-white">
                 Fragile Package
               </label>
             </div>
@@ -198,9 +198,9 @@ export default function OrderForm({
                 id="isExpressDelivery"
                 name="isExpressDelivery"
                 value="true"
-                className="h-5 w-5 text-gold-primary focus:ring-gold-primary"
+                className="h-4 w-4 sm:h-5 sm:w-5 text-gold-primary focus:ring-gold-primary"
               />
-              <label htmlFor="isExpressDelivery" className="ml-2 text-lg font-semibold text-white">
+              <label htmlFor="isExpressDelivery" className="ml-2 text-sm sm:text-lg font-semibold text-white">
                 Express Delivery
               </label>
             </div>
@@ -208,12 +208,12 @@ export default function OrderForm({
         </div>
 
         {/* Delivery Address */}
-        <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-gold-primary">Delivery Address</h3>
+        <div className="space-y-4 sm:space-y-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-gold-primary">Delivery Address</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <label htmlFor="deliveryRecipientName" className="block text-lg font-bold text-white mb-2">
+              <label htmlFor="deliveryRecipientName" className="block text-base sm:text-lg font-bold text-white mb-2">
                 Recipient Name
               </label>
               <input
@@ -221,13 +221,13 @@ export default function OrderForm({
                 id="deliveryRecipientName"
                 name="deliveryRecipientName"
                 required
-                className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                  text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                  text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
               />
             </div>
             
             <div>
-              <label htmlFor="deliveryRecipientPhone" className="block text-lg font-bold text-white mb-2">
+              <label htmlFor="deliveryRecipientPhone" className="block text-base sm:text-lg font-bold text-white mb-2">
                 Recipient Phone
               </label>
               <input
@@ -235,27 +235,27 @@ export default function OrderForm({
                 id="deliveryRecipientPhone"
                 name="deliveryRecipientPhone"
                 required
-                className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                  text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                  text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="deliveryRecipientEmail" className="block text-lg font-bold text-white mb-2">
+            <label htmlFor="deliveryRecipientEmail" className="block text-base sm:text-lg font-bold text-white mb-2">
               Recipient Email (Optional)
             </label>
             <input
               type="email"
               id="deliveryRecipientEmail"
               name="deliveryRecipientEmail"
-              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
             />
           </div>
 
           <div>
-            <label htmlFor="deliveryStreet" className="block text-lg font-bold text-white mb-2">
+            <label htmlFor="deliveryStreet" className="block text-base sm:text-lg font-bold text-white mb-2">
               Street Address
             </label>
             <input
@@ -263,14 +263,14 @@ export default function OrderForm({
               id="deliveryStreet"
               name="deliveryStreet"
               required
-              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div>
-              <label htmlFor="deliveryCity" className="block text-lg font-bold text-white mb-2">
+              <label htmlFor="deliveryCity" className="block text-base sm:text-lg font-bold text-white mb-2">
                 City
               </label>
               <input
@@ -278,13 +278,13 @@ export default function OrderForm({
                 id="deliveryCity"
                 name="deliveryCity"
                 required
-                className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                  text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                  text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
               />
             </div>
             
             <div>
-              <label htmlFor="deliveryState" className="block text-lg font-bold text-white mb-2">
+              <label htmlFor="deliveryState" className="block text-base sm:text-lg font-bold text-white mb-2">
                 State
               </label>
               <input
@@ -292,13 +292,13 @@ export default function OrderForm({
                 id="deliveryState"
                 name="deliveryState"
                 required
-                className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                  text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                  text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
               />
             </div>
             
             <div>
-              <label htmlFor="deliveryPostalCode" className="block text-lg font-bold text-white mb-2">
+              <label htmlFor="deliveryPostalCode" className="block text-base sm:text-lg font-bold text-white mb-2">
                 Postal Code
               </label>
               <input
@@ -306,14 +306,14 @@ export default function OrderForm({
                 id="deliveryPostalCode"
                 name="deliveryPostalCode"
                 required
-                className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                  text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                  text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="deliveryCountry" className="block text-lg font-bold text-white mb-2">
+            <label htmlFor="deliveryCountry" className="block text-base sm:text-lg font-bold text-white mb-2">
               Country
             </label>
             <input
@@ -322,30 +322,30 @@ export default function OrderForm({
               name="deliveryCountry"
               defaultValue="Nigeria"
               required
-              className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-                text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+                text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
             />
           </div>
         </div>
 
         {/* Special Instructions */}
         <div>
-          <label htmlFor="specialInstructions" className="block text-lg font-bold text-white mb-2">
+          <label htmlFor="specialInstructions" className="block text-base sm:text-lg font-bold text-white mb-2">
             Special Instructions (Optional)
           </label>
           <textarea
             id="specialInstructions"
             name="specialInstructions"
             rows={3}
-            className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-              text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+              text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
             placeholder="Any special handling instructions..."
           />
         </div>
 
         {/* Payment Method */}
         <div>
-          <label htmlFor="paymentMethod" className="block text-lg font-bold text-white mb-2">
+          <label htmlFor="paymentMethod" className="block text-base sm:text-lg font-bold text-white mb-2">
             Payment Method
           </label>
           <select
@@ -353,8 +353,8 @@ export default function OrderForm({
             name="paymentMethod"
             required
             defaultValue="BANK_TRANSFER"
-            className="w-full px-4 py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
-              text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800 border-2 border-gray-700 rounded-lg
+              text-base sm:text-xl text-white focus:outline-none focus:ring-2 focus:ring-gold-primary"
           >
             <option value="BANK_TRANSFER">Bank Transfer</option>
           </select>
@@ -362,28 +362,28 @@ export default function OrderForm({
 
         {/* Price Summary */}
         {selectedZone && (
-          <div className="border-t-2 border-gray-700 pt-6 mt-8 space-y-4">
+          <div className="border-t-2 border-gray-700 pt-4 sm:pt-6 mt-6 sm:mt-8 space-y-3 sm:space-y-4">
             <div className="flex justify-between items-center">
-              <span className="text-xl font-bold text-white">Subtotal:</span>
-              <span className="text-2xl font-bold text-gold-primary">₦{(productPrice * quantity).toLocaleString()}</span>
+              <span className="text-base sm:text-xl font-bold text-white">Subtotal:</span>
+              <span className="text-lg sm:text-2xl font-bold text-gold-primary">₦{(productPrice * quantity).toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-xl font-bold text-white">Delivery Fee:</span>
-              <span className="text-2xl font-bold text-gold-primary">₦{selectedZone.deliveryPrice.toLocaleString()}</span>
+              <span className="text-base sm:text-xl font-bold text-white">Delivery Fee:</span>
+              <span className="text-lg sm:text-2xl font-bold text-gold-primary">₦{selectedZone.deliveryPrice.toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-2xl font-bold text-white">Total:</span>
-              <span className="text-3xl font-bold text-gold-primary">₦{((productPrice * quantity) + selectedZone.deliveryPrice).toLocaleString()}</span>
+              <span className="text-lg sm:text-2xl font-bold text-white">Total:</span>
+              <span className="text-xl sm:text-3xl font-bold text-gold-primary">₦{((productPrice * quantity) + selectedZone.deliveryPrice).toLocaleString()}</span>
             </div>
           </div>
         )}
 
         {/* Action Buttons */}
-        <div className="flex gap-6 mt-8">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-6 sm:mt-8">
           <button
             type="submit"
             disabled={loading || !selectedZone}
-            className={`flex-1 px-8 py-4 rounded-lg text-xl font-bold
+            className={`flex-1 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-xl font-bold
               ${loading || !selectedZone
                 ? "bg-gold-primary/50 cursor-not-allowed"
                 : "bg-gold-primary hover:bg-gold-secondary"
@@ -395,7 +395,7 @@ export default function OrderForm({
           <button
             type="button"
             onClick={onCancel}
-            className="flex-1 px-8 py-4 rounded-lg text-xl font-bold
+            className="flex-1 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-xl font-bold
               bg-gray-800 border-2 border-gray-700 text-white
               hover:bg-gray-700 transition-colors"
           >
@@ -404,7 +404,7 @@ export default function OrderForm({
         </div>
 
         {error && (
-          <p className="text-red-500 text-lg font-bold mt-4">{error}</p>
+          <p className="text-red-500 text-sm sm:text-lg font-bold mt-4">{error}</p>
         )}
       </form>
     </motion.div>

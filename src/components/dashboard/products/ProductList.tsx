@@ -97,7 +97,7 @@ const ProductList = memo(function ProductList() {
 
       {loading && !isInitialLoad ? (
         <div className="opacity-50 pointer-events-none">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {products.map((product) => (
               <ProductCard 
                 key={product._id} 
@@ -108,7 +108,7 @@ const ProductList = memo(function ProductList() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {products.map((product) => (
             <ProductCard 
               key={product._id} 
@@ -121,12 +121,12 @@ const ProductList = memo(function ProductList() {
 
       {/* Pagination */}
       {totalPages > 1 && !loading && (
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex flex-wrap justify-center gap-2 mt-6">
           {[...Array(totalPages)].map((_, i) => (
             <button
               key={i}
               onClick={() => handlePageChange(i + 1)}
-              className={`px-4 py-2 rounded ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base rounded ${
                 filters.page === i + 1
                   ? 'bg-gold-primary text-white'
                   : 'bg-gray-100 hover:bg-gray-200'

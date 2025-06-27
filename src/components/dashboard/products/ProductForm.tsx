@@ -18,18 +18,18 @@ interface ProductFormProps {
 }
 
 // Update the input field styles to ensure text is visible
-const inputBaseClasses = `w-full px-4 py-3 bg-dark-primary/5 border-2 border-white/30 rounded-lg
-  text-black font-medium text-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 
+const inputBaseClasses = `w-full px-3 sm:px-4 py-2 sm:py-3 bg-dark-primary/5 border-2 border-white/30 rounded-lg
+  text-black text-sm sm:text-lg font-medium placeholder:text-gray-500 focus:outline-none focus:ring-2 
   focus:ring-gold-primary focus:border-transparent transition-all duration-300
   hover:border-gold-primary/70 shadow-sm shadow-white/10`;
 
 // Update the checkbox container styles
-const checkboxContainerClasses = `flex items-center p-4 bg-dark-primary/5 rounded-lg 
+const checkboxContainerClasses = `flex items-center p-3 sm:p-4 bg-dark-primary/5 rounded-lg 
   border-2 border-white/30 hover:border-gold-primary/50 
   hover:bg-dark-primary/10 transition-all duration-200`;
 
 // Update the checkbox label styles
-const checkboxLabelClasses = `ml-3 text-lg font-medium text-black cursor-pointer
+const checkboxLabelClasses = `ml-2 sm:ml-3 text-sm sm:text-lg font-medium text-black cursor-pointer
   hover:text-gold-primary transition-colors duration-200`;
 
 export default function ProductForm({
@@ -130,18 +130,18 @@ export default function ProductForm({
       )}
 
       {/* Basic Information */}
-      <div className="bg-dark-secondary/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/10 
+      <div className="bg-dark-secondary/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl shadow-lg border border-white/10 
         hover:border-gold-primary/30 transition-all duration-300">
-        <h3 className="text-2xl font-bold text-gold-primary mb-6 flex items-center tracking-wide">
-          <span className="w-10 h-10 rounded-lg bg-gold-primary/20 flex items-center justify-center mr-3">
-            <svg className="w-6 h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <h3 className="text-xl sm:text-2xl font-bold text-gold-primary mb-4 sm:mb-6 flex items-center tracking-wide">
+          <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gold-primary/20 flex items-center justify-center mr-2 sm:mr-3">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gold-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </span>
           Basic Information
         </h3>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           <div className="group">
             <label className="block text-base font-semibold text-gold-primary/90 mb-2 tracking-wide">
               Product Name
@@ -335,29 +335,29 @@ export default function ProductForm({
       </div>
 
       {/* Submit Button Section */}
-      <div className="flex justify-end gap-4 pt-6">
+      <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 pt-4 sm:pt-6">
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-6 py-3 border-2 border-white/20 rounded-lg text-white font-semibold
+          className="px-4 sm:px-6 py-2 sm:py-3 border-2 border-white/20 rounded-lg text-white font-semibold
             hover:bg-dark-secondary hover:border-white/40 transition-all duration-300
-            flex items-center text-base tracking-wide"
+            flex items-center justify-center text-sm sm:text-base tracking-wide w-full sm:w-auto"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="px-8 py-3 bg-gradient-to-r from-gold-primary to-gold-secondary 
-            text-dark-primary rounded-lg font-bold text-base tracking-wide
+          className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-gold-primary to-gold-secondary 
+            text-dark-primary rounded-lg font-bold text-sm sm:text-base tracking-wide
             hover:shadow-lg hover:shadow-gold-primary/20 
             disabled:opacity-50 disabled:cursor-not-allowed
             transform hover:scale-102 active:scale-98
-            transition-all duration-300 flex items-center"
+            transition-all duration-300 flex items-center justify-center w-full sm:w-auto"
         >
           {loading ? (
             <>
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-dark-primary" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 sm:h-5 sm:w-5 text-dark-primary" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
@@ -365,7 +365,7 @@ export default function ProductForm({
             </>
           ) : (
             <>
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               {isEditing ? "Update Product" : "Create Product"}

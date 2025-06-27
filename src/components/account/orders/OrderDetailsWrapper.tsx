@@ -8,7 +8,7 @@ const OrderDetailsClient = dynamic(
   () => import('@/components/account/orders/OrderDetailsClient'),
   { 
     ssr: false,
-    loading: () => <div className="text-gold-primary text-xl font-bold">Loading order details...</div>
+    loading: () => <div className="text-gold-primary text-base sm:text-xl font-bold p-4">Loading order details...</div>
   }
 );
 
@@ -18,12 +18,14 @@ interface OrderDetailsWrapperProps {
 
 export default function OrderDetailsWrapper({ orderId }: OrderDetailsWrapperProps) {
   if (!orderId) {
-    return <div className="text-gold-primary text-xl font-bold">No order ID provided</div>;
+    return <div className="text-gold-primary text-base sm:text-xl font-bold p-4">No order ID provided</div>;
   }
 
   return (
-    <Suspense fallback={<div className="text-gold-primary text-xl font-bold">Loading order details...</div>}>
-      <OrderDetailsClient orderId={orderId} />
+    <Suspense fallback={<div className="text-gold-primary text-base sm:text-xl font-bold p-4">Loading order details...</div>}>
+      <div className="p-4 sm:p-0">
+        <OrderDetailsClient orderId={orderId} />
+      </div>
     </Suspense>
   );
 } 
