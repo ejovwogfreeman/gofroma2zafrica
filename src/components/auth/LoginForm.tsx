@@ -143,20 +143,20 @@ export default function LoginForm() {
             Password
           </label>
           <div className="relative">
-            <input
+          <input
               type={showPassword ? "text" : "password"}
-              id="password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-              className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
-                text-dark placeholder:text-gray-400
-                focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent
-                hover:border-gold-primary/50
-                transition-all duration-300"
-              required
-            />
+            id="password"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+            className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
+              text-dark placeholder:text-gray-400
+              focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent
+              hover:border-gold-primary/50
+              transition-all duration-300"
+            required
+          />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}

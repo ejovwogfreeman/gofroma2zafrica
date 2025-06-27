@@ -24,7 +24,7 @@ export default function OrderDetailsWrapper({ orderId }: OrderDetailsWrapperProp
   return (
     <Suspense fallback={<div className="text-gold-primary text-base sm:text-xl font-bold p-4">Loading order details...</div>}>
       <div className="p-4 sm:p-0">
-        <OrderDetailsClient orderId={orderId} />
+      <OrderDetailsClient orderId={orderId} />
       </div>
     </Suspense>
   );

@@ -58,6 +58,8 @@ export interface ProductFilters {
   category?: string
   status?: ProductStatus
   search?: string
+  sortBy?: string
+  sortOrder?: 'asc' | 'desc'
 }
 
 export interface PaginatedProducts {

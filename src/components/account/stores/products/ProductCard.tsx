@@ -32,12 +32,15 @@ export default function ProductCard({
   const [imageUrl, setImageUrl] = useState<string>("");
   const [imageError, setImageError] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [addingToCart, setAddingToCart] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Image URL handling effect
   useEffect(() => {
+    // Reset state for new product
+    setIsImageLoading(true);
+    setImageError(false);
+
     if (!product.images?.length) {
       const placeholderUrl = `https://picsum.photos/seed/${product._id}/400/300`;
       setImageUrl(placeholderUrl);
@@ -46,31 +49,29 @@ export default function ProductCard({
     }
 
     const firstImage = product.images[0] as string | ProductImage;
-    let imageUrl = "";
+    let newImageUrl = "";
 
     if (typeof firstImage === "string") {
-      imageUrl = firstImage;
+      newImageUrl = firstImage;
     } else if (
       firstImage &&
       typeof firstImage === "object" &&
       "url" in firstImage
     ) {
-      imageUrl = firstImage.url;
+      newImageUrl = firstImage.url;
     }
 
-    if (!imageUrl) {
+    if (!newImageUrl) {
       setImageError(true);
       setIsImageLoading(false);
-      return;
+    } else {
+      setImageUrl(newImageUrl);
     }
-
-    setImageUrl(imageUrl);
   }, [product._id, product.images]);
 
   const handleImageLoad = useCallback(() => {
     if (isMounted.current) {
       setIsImageLoading(false);
-      setImageLoaded(true);
     }
   }, []);
 
@@ -78,7 +79,6 @@ export default function ProductCard({
     if (isMounted.current) {
       setImageError(true);
       setIsImageLoading(false);
-      setImageLoaded(false);
     }
   }, []);
 
@@ -150,9 +150,9 @@ export default function ProductCard({
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
               className={`object-cover transition-opacity duration-300 ${
-                imageLoaded ? "opacity-100" : "opacity-0"
+                !isImageLoading ? "opacity-100" : "opacity-0"
               }`}
-              onLoadingComplete={handleImageLoad}
+              onLoad={handleImageLoad}
               onError={handleImageError}
               priority={true}
             />
