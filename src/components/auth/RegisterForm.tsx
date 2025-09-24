@@ -55,7 +55,7 @@ export default function RegisterForm() {
 
       if (response.ok) {
         setStatus("success");
-        setMessage("Registration successful! We've sent a verification code to your email.");
+        setMessage("Registration successful! We've sent a verification code to your WhatsApp.");
         setUserId(data.userId || data.data?.user?._id || "");
         setShowOtpForm(true);
       } else {
@@ -81,7 +81,7 @@ export default function RegisterForm() {
         setMessage("Configuration error: Backend URL is missing.");
         return;
       }
-      const response = await fetch(`${backendApiUrl}/api/users/verify-email`, {
+      const response = await fetch(`${backendApiUrl}/api/users/verify-phone`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, otp }),
@@ -91,7 +91,7 @@ export default function RegisterForm() {
 
       if (response.ok) {
         setStatus("success");
-        setMessage("Email verified successfully! You can now login.");
+        setMessage("Phone verified successfully! You can now login.");
         setTimeout(() => router.push("/login"), 2000);
       } else {
         setStatus("error");
@@ -277,7 +277,7 @@ export default function RegisterForm() {
               required
             />
           </div>
-          <SubmitButton status={status} text="Verify Email" />
+          <SubmitButton status={status} text="Verify Phone" />
         </motion.form>
       )}
 
