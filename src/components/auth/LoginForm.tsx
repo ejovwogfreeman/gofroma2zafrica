@@ -12,7 +12,7 @@ export default function LoginForm() {
     "merchant"
   );
   const [formData, setFormData] = useState({
-    email: "",
+    phone: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -118,15 +118,15 @@ export default function LoginForm() {
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-dark mb-2">
-            Email Address
+          <label htmlFor="phone" className="block text-dark mb-2">
+            Phone Number
           </label>
           <input
-            type="email"
-            id="email"
-            value={formData.email}
+            type="tel"
+            id="phone"
+            value={formData.phone}
             onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
+              setFormData({ ...formData, phone: e.target.value })
             }
             className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg
               text-dark placeholder:text-gray-400
