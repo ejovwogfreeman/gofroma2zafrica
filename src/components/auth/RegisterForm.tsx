@@ -18,7 +18,9 @@ export default function RegisterForm() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
   const [showOtpForm, setShowOtpForm] = useState(false);
@@ -27,7 +29,9 @@ export default function RegisterForm() {
   const getBackendApiUrl = () => {
     const url = process.env.NEXT_PUBLIC_API_URL;
     if (!url) {
-      console.error("NEXT_PUBLIC_API_URL is not defined in environment variables.");
+      console.error(
+        "NEXT_PUBLIC_API_URL is not defined in environment variables.",
+      );
       return "";
     }
     return url;
@@ -55,7 +59,9 @@ export default function RegisterForm() {
 
       if (response.ok) {
         setStatus("success");
-        setMessage("Registration successful! We've sent a verification code to your WhatsApp.");
+        setMessage(
+          "Registration successful! We've sent a verification code to your WhatsApp.",
+        );
         setUserId(data.userId || data.data?.user?._id || "");
         setShowOtpForm(true);
       } else {
@@ -136,7 +142,7 @@ export default function RegisterForm() {
 
         setStatus("success");
         setMessage("Google sign-in successful! Redirecting...");
-        router.replace("/dashboard");          // <-- merchant dashboard
+        router.replace("/dashboard"); // <-- merchant dashboard
       } else {
         console.error("Backend Google login failed:", data);
         setStatus("error");
@@ -163,8 +169,12 @@ export default function RegisterForm() {
     >
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl lg:text-5xl font-bold hero-gradient-text mb-4">Join GoFromA2zAfrica</h1>
-        <p className="text-text-secondary text-lg">Start your digital transformation journey today</p>
+        <h1 className="text-4xl lg:text-5xl font-bold hero-gradient-text mb-4">
+          Join Africgo
+        </h1>
+        <p className="text-text-secondary text-lg">
+          Start your digital transformation journey today
+        </p>
       </div>
 
       {!showOtpForm ? (
@@ -179,37 +189,49 @@ export default function RegisterForm() {
           <StatusMessage status={status} message={message} />
 
           <div>
-            <label htmlFor="name" className="block text-dark mb-2">Full Name</label>
+            <label htmlFor="name" className="block text-dark mb-2">
+              Full Name
+            </label>
             <input
               type="text"
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent hover:border-gold-primary/50 transition-all duration-300"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-dark mb-2">Email Address</label>
+            <label htmlFor="email" className="block text-dark mb-2">
+              Email Address
+            </label>
             <input
               type="email"
               id="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent hover:border-gold-primary/50 transition-all duration-300"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-dark mb-2">Password</label>
+            <label htmlFor="password" className="block text-dark mb-2">
+              Password
+            </label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 id="password"
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent hover:border-gold-primary/50 transition-all duration-300"
                 required
               />
@@ -224,12 +246,16 @@ export default function RegisterForm() {
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-dark mb-2">Phone Number</label>
+            <label htmlFor="phone" className="block text-dark mb-2">
+              Phone Number
+            </label>
             <input
               type="tel"
               id="phone"
               value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
               className="w-full px-4 py-3 bg-dark-secondary border border-white/10 rounded-lg text-dark placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-primary focus:border-transparent hover:border-gold-primary/50 transition-all duration-300"
               required
             />
@@ -250,7 +276,9 @@ export default function RegisterForm() {
           {/* Google Sign-In */}
           <div className="flex justify-center">
             <GoogleLogin
-              onSuccess={(res) => res?.credential && handleGoogleSuccess(res.credential)}
+              onSuccess={(res) =>
+                res?.credential && handleGoogleSuccess(res.credential)
+              }
               onError={handleGoogleError}
               useOneTap
             />
@@ -267,7 +295,9 @@ export default function RegisterForm() {
         >
           <StatusMessage status={status} message={message} />
           <div>
-            <label htmlFor="otp" className="block text-dark mb-2">Enter Verification Code</label>
+            <label htmlFor="otp" className="block text-dark mb-2">
+              Enter Verification Code
+            </label>
             <input
               type="text"
               id="otp"
@@ -288,7 +318,10 @@ export default function RegisterForm() {
         transition={{ duration: 0.8, delay: 0.4 }}
         className="mt-8 text-center"
       >
-        <Link href="/" className="text-text-secondary hover:text-dark transition-colors">
+        <Link
+          href="/"
+          className="text-text-secondary hover:text-dark transition-colors"
+        >
           ← Back to Home
         </Link>
       </motion.div>
@@ -304,12 +337,16 @@ const SubmitButton = ({ status, text }: { status: string; text: string }) => (
     type="submit"
     disabled={status === "loading"}
     className={`relative w-full px-6 py-4 bg-gradient-to-r from-gold-primary to-gold-secondary rounded-lg text-dark-primary font-medium overflow-hidden ${
-      status === "loading" ? "opacity-75 cursor-not-allowed" : "hover:shadow-lg hover:shadow-gold-primary/20"
+      status === "loading"
+        ? "opacity-75 cursor-not-allowed"
+        : "hover:shadow-lg hover:shadow-gold-primary/20"
     } transition-all duration-300`}
     whileHover={{ scale: status === "loading" ? 1 : 1.02 }}
     whileTap={{ scale: status === "loading" ? 1 : 0.98 }}
   >
-    <span className="relative z-10">{status === "loading" ? <LoadingDots /> : text}</span>
+    <span className="relative z-10">
+      {status === "loading" ? <LoadingDots /> : text}
+    </span>
   </motion.button>
 );
 

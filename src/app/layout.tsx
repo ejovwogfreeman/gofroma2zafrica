@@ -3,7 +3,7 @@ import RootLayoutClient from "./RootLayoutClient";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "GoFromA2zAfrica",
+  title: "Africgo",
   description: "Your Premier African Marketplace",
 };
 

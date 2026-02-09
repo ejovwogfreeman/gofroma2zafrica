@@ -5,12 +5,12 @@ const cnad = require("@bitc/cnad");
 
 const port = parseInt(process.env.PORT || "3000", 10);
 const hostname =
-  process.env.NODE_ENV !== "production" ? "localhost" : "gofroma2zafrica.com";
+  process.env.NODE_ENV !== "production" ? "localhost" : "africgo.org";
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-cnad.config("/home/gofromaz/nodevenv/gofroma2zafrica.com/20");
+cnad.config("/home/gofromaz/nodevenv/africgo.org/20");
 
 app.prepare().then(() => {
   cnad.start();
@@ -22,6 +22,6 @@ app.prepare().then(() => {
   console.log(
     `> Server listening at http://localhost:${port} as ${
       dev ? "development" : process.env.NODE_ENV
-    }`
+    }`,
   );
 });

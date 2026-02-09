@@ -6,7 +6,7 @@ export default function Logo() {
     <Link href="/" className="flex items-center space-x-3">
       <Image
         src="/logo.png"
-        alt="GoFromA2zAfrica Logo"
+        alt="Africgo Logo"
         width={48}
         height={48}
         className="w-12 h-12"
@@ -15,7 +15,7 @@ export default function Logo() {
         className="font-bold text-2xl tracking-tight"
         style={{ marginLeft: "-5px" }}
       >
-        GoFromA2zAfrica
+        Africgo
       </span>
     </Link>
   );

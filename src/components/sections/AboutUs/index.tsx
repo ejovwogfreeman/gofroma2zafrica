@@ -6,7 +6,7 @@ const features = [
   {
     title: "About Us",
     description:
-      "GoFromA2zAfrica facilitates seamless business scaling across Africa. We provide small and large businesses with access to extensive resources, including talent, logistics, and IT solutions. Our goal is to enable efficient and confident expansion into new regions, partnering with businesses to overcome challenges and uncertainties in new territories.",
+      "Africgo facilitates seamless business scaling across Africa. We provide small and large businesses with access to extensive resources, including talent, logistics, and IT solutions. Our goal is to enable efficient and confident expansion into new regions, partnering with businesses to overcome challenges and uncertainties in new territories.",
     icon: "🚚",
     gradient: "from-gold-primary/20 to-gold-secondary/20",
   },

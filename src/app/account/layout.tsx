@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import AccountLayout from "@/components/account/layout/AccountLayout";
 
 export const metadata: Metadata = {
-  title: "Account Dashboard | GoFromA2zAfrica",
+  title: "Account Dashboard | Africgo",
   description: "Manage your account, orders, and preferences",
 };
 

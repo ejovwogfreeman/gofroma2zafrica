@@ -140,7 +140,7 @@ export default function Privacy() {
                   <strong>
                     Email: alphainteractivehub@gmail.com <br />
                     Phone: +234 706 609 6155 <br />
-                    Support Center: support@gofroma2zafrica.com
+                    Support Center: support@africgo.org
                   </strong>
                 </p>
 
@@ -182,7 +182,7 @@ export default function Privacy() {
                   <br />
                   <strong>Phone:</strong> +234 706 609 6155
                   <br />
-                  <strong>Support Center:</strong> support@gofroma2zafrica.com
+                  <strong>Support Center:</strong> support@africgo.org
                 </p>
               </section>
             </div>

@@ -28,7 +28,7 @@ export default function AccountTypeSelector() {
     >
       <div className="text-center mb-12">
         <h1 className="text-4xl lg:text-5xl font-bold hero-gradient-text mb-4">
-          Join GoFromA2zAfrica
+          Join Africgo
         </h1>
         <p className="text-text-secondary text-lg">
           Choose your account type to get started

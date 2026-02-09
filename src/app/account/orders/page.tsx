@@ -1,10 +1,10 @@
-import { Metadata } from "next"
-import OrderList from "@/components/account/orders/OrderList"
+import { Metadata } from "next";
+import OrderList from "@/components/account/orders/OrderList";
 
 export const metadata: Metadata = {
-  title: "My Orders | GoFromA2zAfrica",
+  title: "My Orders | Africgo",
   description: "View and manage your orders",
-}
+};
 
 interface OrdersPageProps {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -16,4 +16,4 @@ export default async function OrdersPage({ searchParams }: OrdersPageProps) {
       <OrderList />
     </div>
   );
-} 
+}
