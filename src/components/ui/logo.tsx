@@ -15,7 +15,7 @@ export default function Logo() {
         className="font-bold text-2xl tracking-tight"
         style={{ marginLeft: "-5px" }}
       >
-        Africgo
+        AfricGo
       </span>
     </Link>
   );
