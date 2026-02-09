@@ -266,23 +266,54 @@ export async function getProductById(productId: string): Promise<Product> {
 }
 
 // Search products
-export async function searchProducts(query: string, filters: ProductFilters = {}): Promise<PaginatedProducts> {
-  const queryParams = new URLSearchParams({ query })
+export async function searchProducts(query: string = '', filters: ProductFilters = {}): Promise<PaginatedProducts> {
+  const queryParams = new URLSearchParams()
   
+  // Add search query if provided
+  if (query) queryParams.append('query', query)
+  
+  // Add filters
   if (filters.page) queryParams.append('page', filters.page.toString())
   if (filters.limit) queryParams.append('limit', filters.limit.toString())
   if (filters.category) queryParams.append('category', filters.category)
+  if (filters.sortBy) queryParams.append('sortBy', filters.sortBy)
+  if (filters.sortOrder) queryParams.append('sortOrder', filters.sortOrder)
 
   const response = await fetch(
     `${API_URL}/api/products/search?${queryParams.toString()}`,
     {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
+        'Content-Type': 'application/json'
+      },
+      cache: 'no-store'
     }
   )
 
-  return handleResponse<PaginatedProducts>(response)
+  const data = await response.json()
+
+  if (!response.ok || !data.success) {
+    throw new Error(data.message || 'Failed to search products')
+  }
+
+  // Format the response to match the PaginatedProducts type
+  return {
+    products: data.data.products.map((product: any) => ({
+      ...product,
+      price: Number(product.price),
+      stock: Number(product.stock),
+      images: Array.isArray(product.images) ? product.images.map((img: any) => 
+        typeof img === 'string' ? img : {
+          url: img.url,
+          alt: product.name,
+          publicId: img.publicId,
+          _id: img._id
+        }
+      ) : []
+    })),
+    total: data.data.total,
+    page: data.data.page,
+    totalPages: data.data.totalPages
+  }
 }
 
 // Add this new function to get products by store slug

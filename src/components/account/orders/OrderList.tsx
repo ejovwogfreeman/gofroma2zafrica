@@ -75,29 +75,29 @@ export default function OrderList() {
 
   if (loading) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center">
-        <div className="text-xl text-gray-600">Loading orders...</div>
+      <div className="min-h-[400px] flex items-center justify-center p-4">
+        <div className="text-base sm:text-xl text-gray-600">Loading orders...</div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-[400px] flex items-center justify-center">
-        <div className="text-xl text-red-500">{error}</div>
+      <div className="min-h-[400px] flex items-center justify-center p-4">
+        <div className="text-base sm:text-xl text-red-500">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 p-4 sm:p-6">
       {/* Filters */}
-      <div className="flex flex-wrap gap-4 mb-6">
-        <div className="flex-1 min-w-[200px]">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6">
+        <div className="w-full sm:w-auto sm:flex-1">
           <select
             value={selectedStatus}
             onChange={handleStatusChange}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 sm:p-3 border rounded-lg text-sm sm:text-base"
           >
             <option value="">All Statuses</option>
             <option value="PENDING">Pending</option>
@@ -107,30 +107,30 @@ export default function OrderList() {
           </select>
         </div>
 
-        <div className="flex-1 min-w-[200px]">
+        <div className="w-full sm:w-auto sm:flex-1">
           <input
             type="date"
             value={dateRange.startDate}
             onChange={(e) => handleDateChange("startDate", e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 sm:p-3 border rounded-lg text-sm sm:text-base"
             placeholder="Start Date"
           />
         </div>
 
-        <div className="flex-1 min-w-[200px]">
+        <div className="w-full sm:w-auto sm:flex-1">
           <input
             type="date"
             value={dateRange.endDate}
             onChange={(e) => handleDateChange("endDate", e.target.value)}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-2 sm:p-3 border rounded-lg text-sm sm:text-base"
             placeholder="End Date"
           />
         </div>
       </div>
 
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">My Orders</h1>
-        <p className="text-gray-600">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900">My Orders</h1>
+        <p className="text-sm sm:text-base text-gray-600">
           Showing {(currentPage - 1) * ordersPerPage + 1}-
           {Math.min(currentPage * ordersPerPage, totalOrders)} of {totalOrders}{" "}
           orders
@@ -138,33 +138,33 @@ export default function OrderList() {
       </div>
 
       {orders.length === 0 ? (
-        <div className="text-gray-600 text-center py-8">No orders found</div>
+        <div className="text-base sm:text-lg text-gray-600 text-center py-6 sm:py-8">No orders found</div>
       ) : (
         <>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="grid gap-4"
+            className="grid gap-3 sm:gap-4"
           >
             {orders.map((order) => (
               <Link
                 key={order._id}
                 href={`/account/orders/${order._id}`}
-                className="block bg-white p-6 rounded-lg border border-gray-200 shadow-sm
+                className="block bg-white p-4 sm:p-6 rounded-lg border border-gray-200 shadow-sm
                   hover:border-gold-primary transition-colors"
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <div className="space-y-1">
-                    <p className="text-gray-900 font-medium">
+                    <p className="text-base sm:text-lg text-gray-900 font-medium">
                       Order #{order.trackingNumber}
                     </p>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       {new Date(order.createdAt).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div>
                     <span
-                      className={`inline-block px-3 py-1 rounded-full text-sm font-medium
+                      className={`inline-block px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium
                       ${
                         order.status === "DELIVERED"
                           ? "bg-green-100 text-green-800"
@@ -180,30 +180,30 @@ export default function OrderList() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
                   <div>
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-gray-900 mb-1">
                       Delivery Address
                     </p>
-                    <p className="text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       {order.deliveryAddress.manualAddress?.street ||
                         order.deliveryAddress.street}
                     </p>
-                    <p className="text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       {order.deliveryAddress.manualAddress?.city ||
                         order.deliveryAddress.city}
-                      ,
+                      ,{" "}
                       {order.deliveryAddress.manualAddress?.state ||
                         order.deliveryAddress.state}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium text-gray-900">Total Amount</p>
-                    <p className="text-gold-primary font-medium">
+                  <div className="text-left sm:text-right">
+                    <p className="font-medium text-gray-900 mb-1">Total Amount</p>
+                    <p className="text-base sm:text-lg text-gold-primary font-medium">
                       ₦{order.price.toLocaleString()}
                     </p>
                     {order.zonePrice && (
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-xs sm:text-sm text-gray-600">
                         (Includes ₦{order.zonePrice.toLocaleString()} delivery
                         fee)
                       </p>
@@ -216,11 +216,11 @@ export default function OrderList() {
 
           {/* Pagination */}
           {totalOrders > ordersPerPage && (
-            <div className="flex justify-center items-center space-x-2 mt-8">
+            <div className="flex flex-wrap justify-center items-center gap-2 mt-6 sm:mt-8">
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className={`px-4 py-2 rounded-lg text-sm font-medium
+                className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium
                   ${
                     currentPage === 1
                       ? "bg-gray-100 text-gray-400 cursor-not-allowed"
@@ -235,7 +235,7 @@ export default function OrderList() {
                   <button
                     key={page}
                     onClick={() => handlePageChange(page)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium
+                    className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium
                     ${
                       currentPage === page
                         ? "bg-gold-primary text-white"
@@ -250,7 +250,7 @@ export default function OrderList() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className={`px-4 py-2 rounded-lg text-sm font-medium
+                className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium
                   ${
                     currentPage === totalPages
                       ? "bg-gray-100 text-gray-400 cursor-not-allowed"

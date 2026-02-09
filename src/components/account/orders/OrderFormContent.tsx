@@ -51,22 +51,22 @@ export default function OrderFormContent() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gold-primary"></div>
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-t-2 border-b-2 border-gold-primary"></div>
       </div>
     );
   }
 
   if (error || !product || !store || !storeSlug || !productId) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-red-500 text-xl">{error || 'Invalid order parameters'}</div>
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div className="text-red-500 text-base sm:text-xl text-center">{error || 'Invalid order parameters'}</div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-4 sm:py-8">
       <OrderForm
         storeId={store._id}
         productId={productId}

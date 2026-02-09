@@ -28,8 +28,8 @@ export default function PaymentTimer({ expiryTime, onExpire }: PaymentTimerProps
 
   return (
     <div className="text-center">
-      <p className="text-lg text-white mb-2">Time remaining to complete payment:</p>
-      <p className="text-4xl font-bold text-gold-primary">
+      <p className="text-base sm:text-lg text-white mb-1 sm:mb-2">Time remaining to complete payment:</p>
+      <p className="text-2xl sm:text-4xl font-bold text-gold-primary">
         {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
       </p>
     </div>

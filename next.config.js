@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: "build",
+  //distDir: "build",
   eslint: {
     ignoreDuringBuilds: true, // This will ignore ESLint errors during build
     // Alternatively, you can configure specific rules:

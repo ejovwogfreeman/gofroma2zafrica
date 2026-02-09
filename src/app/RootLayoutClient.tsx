@@ -1,7 +1,9 @@
+// src/app/RootLayoutClient.tsx
 "use client";
 
 import { usePathname } from "next/navigation";
 import ClientLayout from "@/components/layout/ClientLayout";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 export default function RootLayoutClient({
   children,
@@ -10,7 +12,6 @@ export default function RootLayoutClient({
 }) {
   const pathname = usePathname();
 
-  // Add account to the exclusion checks
   const isDashboard = pathname?.startsWith("/dashboard");
   const isAuth =
     pathname?.startsWith("/login") ||
@@ -19,11 +20,18 @@ export default function RootLayoutClient({
     pathname?.startsWith("/forget-password");
   const isAccount = pathname?.startsWith("/account");
 
+  // Always wrap with GoogleOAuthProvider
+  const content = (
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+      {children}
+    </GoogleOAuthProvider>
+  );
+
   // Return raw children for dashboard, auth, and account routes
   if (isDashboard || isAuth || isAccount) {
-    return children;
+    return content;
   }
 
   // Use ClientLayout for marketing and stores pages
-  return <ClientLayout>{children}</ClientLayout>;
+  return <ClientLayout>{content}</ClientLayout>;
 }

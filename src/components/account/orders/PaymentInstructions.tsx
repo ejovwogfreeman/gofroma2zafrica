@@ -81,7 +81,7 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <div className="text-gold-primary text-xl">
+        <div className="text-gold-primary text-base sm:text-xl">
           Loading payment details...
         </div>
       </div>
@@ -90,26 +90,26 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
 
   if (error) {
     return (
-      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <div className="bg-red-100 border border-red-400 text-red-700 p-3 sm:p-4 rounded text-sm sm:text-base">
         <p>{error}</p>
-        <p className="text-sm mt-2">Order ID: {orderId}</p>
+        <p className="text-xs sm:text-sm mt-2">Order ID: {orderId}</p>
       </div>
     );
   }
 
   if (!order?.paymentInstructions) {
     return (
-      <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+      <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 p-3 sm:p-4 rounded text-sm sm:text-base">
         <p>Payment instructions not found</p>
-        <p className="text-sm mt-2">Order ID: {orderId}</p>
-        <p className="text-sm mt-1">Order Status: {order?.status}</p>
-        <p className="text-sm mt-1">
+        <p className="text-xs sm:text-sm mt-2">Order ID: {orderId}</p>
+        <p className="text-xs sm:text-sm mt-1">Order Status: {order?.status}</p>
+        <p className="text-xs sm:text-sm mt-1">
           Order Data Available: {order ? "Yes" : "No"}
         </p>
         {order && (
           <details className="mt-2">
-            <summary className="cursor-pointer">Debug Info</summary>
-            <pre className="mt-2 text-xs whitespace-pre-wrap">
+            <summary className="cursor-pointer text-xs sm:text-sm">Debug Info</summary>
+            <pre className="mt-2 text-xs whitespace-pre-wrap overflow-x-auto">
               {JSON.stringify(order, null, 2)}
             </pre>
           </details>
@@ -125,9 +125,9 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="max-w-2xl mx-auto bg-gray-900 p-8 rounded-lg border-2 border-gray-700"
+      className="max-w-2xl mx-auto bg-gray-900 p-4 sm:p-8 rounded-lg border-2 border-gray-700"
     >
-      <h2 className="text-3xl font-bold text-gold-primary mb-8">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gold-primary mb-6 sm:mb-8">
         Payment Instructions
       </h2>
 
@@ -136,36 +136,28 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
         onExpire={() => router.push("/account/orders")}
       />
 
-      <div className="space-y-6 mt-8">
+      <div className="space-y-4 sm:space-y-6 mt-6 sm:mt-8">
         {/* Bank Details */}
-        <div className="bg-gray-800 p-6 rounded-lg">
-          <h3 className="text-xl font-bold text-white mb-4">
+        <div className="bg-gray-800 p-4 sm:p-6 rounded-lg">
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">
             Bank Transfer Details
           </h3>
-          <div className="space-y-3">
-            <p className="text-white">
-              {/* <span className="font-bold">Bank:</span> {bankDetails.bankName} */}
-              <span className="font-bold">Bank:</span>Moniepoint
+          <div className="space-y-2 sm:space-y-3">
+            <p className="text-sm sm:text-base text-white">
+              <span className="font-bold">Bank:</span> Moniepoint
             </p>
-            {/* <span className="font-bold">Account Name:</span> {bankDetails.accountName} */}
-            {/* {bankDetails.accountName} */}
-            <p className="text-white">
-              <span className="font-bold">Account Name:</span>Alpha Interactive
-              Tech Hub Nig/usele freedom oghenekeno
+            <p className="text-sm sm:text-base text-white">
+              <span className="font-bold">Account Name:</span> Alpha Interactive
+              Tech Hub Nig/usele freedom oghenekeno
             </p>
-            {/* <span className="font-bold">Account Number:</span> {bankDetails.accountNumber} */}
-            {/* <p className="text-white">
-              <span className="font-bold">Account Number:</span>{" "}
-              <span>8284145223</span>
-            </p> */}
-            <div className="flex items-center space-x-2 text-white">
+            <div className="flex items-center space-x-2 text-sm sm:text-base text-white">
               <p className="m-0">
                 <span className="font-bold">Account Number:</span>{" "}
                 <span>{accountNumber}</span>
               </p>
               <button
                 onClick={copyToClipboard}
-                className="bg-blue-600 px-2 py-1 rounded text-sm hover:bg-blue-700"
+                className="bg-blue-600 px-2 py-1 rounded text-xs sm:text-sm hover:bg-blue-700"
               >
                 {copied ? "Copied!" : "Copy"}
               </button>
@@ -174,23 +166,23 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
         </div>
 
         {/* Payment Breakdown */}
-        <div className="bg-gray-800 p-6 rounded-lg">
-          <h3 className="text-xl font-bold text-white mb-4">Payment Details</h3>
-          <div className="space-y-3">
-            <p className="text-white flex justify-between">
+        <div className="bg-gray-800 p-4 sm:p-6 rounded-lg">
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">Payment Details</h3>
+          <div className="space-y-2 sm:space-y-3">
+            <p className="text-sm sm:text-base text-white flex justify-between">
               <span>Subtotal:</span>
               <span>
                 {currency} {subtotal.toLocaleString()}
               </span>
             </p>
-            <p className="text-white flex justify-between">
+            <p className="text-sm sm:text-base text-white flex justify-between">
               <span>Delivery Fee:</span>
               <span>
                 {currency} {deliveryFee.toLocaleString()}
               </span>
             </p>
-            <div className="border-t border-gray-600 my-3"></div>
-            <p className="text-white flex justify-between text-lg font-bold">
+            <div className="border-t border-gray-600 my-2 sm:my-3"></div>
+            <p className="text-base sm:text-lg text-white flex justify-between font-bold">
               <span>Total Amount:</span>
               <span>
                 {currency} {amount.toLocaleString()}
@@ -200,22 +192,22 @@ export default function PaymentInstructions({ orderId }: { orderId: string }) {
         </div>
 
         {/* Instructions */}
-        <div className="bg-gray-800 p-6 rounded-lg">
-          <h3 className="text-xl font-bold text-white mb-4">
+        <div className="bg-gray-800 p-4 sm:p-6 rounded-lg">
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-3 sm:mb-4">
             Important Instructions
           </h3>
-          <p className="text-white">{instructions}</p>
+          <p className="text-sm sm:text-base text-white">{instructions}</p>
         </div>
 
         {/* Confirm Payment Button */}
         <button
           onClick={handlePaymentConfirm}
           disabled={confirming}
-          className={`w-full px-8 py-4 ${
+          className={`w-full px-6 sm:px-8 py-3 sm:py-4 ${
             confirming
               ? "bg-gray-500 cursor-not-allowed"
               : "bg-gold-primary hover:bg-gold-secondary"
-          } text-gray-900 rounded-lg text-xl font-bold transition-colors`}
+          } text-gray-900 rounded-lg text-base sm:text-xl font-bold transition-colors`}
         >
           {confirming ? "Confirming Payment..." : "I Have Made the Payment"}
         </button>

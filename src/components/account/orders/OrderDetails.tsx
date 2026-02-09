@@ -66,27 +66,27 @@ export default function OrderDetails({ orderId }: { orderId: string }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="space-y-8"
+      className="space-y-6 sm:space-y-8"
     >
-      <div className="flex items-center justify-between bg-gray-900 p-6 rounded-lg border-2 border-gray-700">
-        <h1 className="text-3xl font-bold text-white">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-gray-900 p-4 sm:p-6 rounded-lg border-2 border-gray-700">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-0">
           Order #{order.trackingNumber}
         </h1>
         <Link
           href="/account/orders"
-          className="text-gold-primary hover:text-gold-secondary transition-colors text-lg font-medium"
+          className="text-gold-primary hover:text-gold-secondary transition-colors text-base sm:text-lg font-medium"
         >
           ← Back to Orders
         </Link>
       </div>
 
-      <div className="bg-gray-900 p-8 rounded-lg border-2 border-gray-700">
-        <div className="space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-b-2 border-gray-700 pb-8">
+      <div className="bg-gray-900 p-4 sm:p-8 rounded-lg border-2 border-gray-700">
+        <div className="space-y-6 sm:space-y-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 border-b-2 border-gray-700 pb-6 sm:pb-8">
             <div>
-              <h2 className="text-xl font-bold text-white mb-4">Order Status</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-white mb-4">Order Status</h2>
               <span
-                className={`inline-block px-6 py-3 rounded-full text-base font-bold
+                className={`inline-block px-4 sm:px-6 py-2 sm:py-3 rounded-full text-sm sm:text-base font-bold
                   ${
                     order.status === "DELIVERED"
                       ? "bg-green-600 text-white"
@@ -99,72 +99,72 @@ export default function OrderDetails({ orderId }: { orderId: string }) {
               </span>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white mb-2">Order Date</h3>
-              <p className="text-xl text-gold-primary font-medium">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2">Order Date</h3>
+              <p className="text-lg sm:text-xl text-gold-primary font-medium">
                 {new Date(order.createdAt).toLocaleDateString()}
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-b-2 border-gray-700 pb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 border-b-2 border-gray-700 pb-6 sm:pb-8">
             <div>
-              <h2 className="text-xl font-bold text-white mb-4">Total Amount</h2>
-              <p className="text-3xl font-bold text-gold-primary">
+              <h2 className="text-lg sm:text-xl font-bold text-white mb-4">Total Amount</h2>
+              <p className="text-2xl sm:text-3xl font-bold text-gold-primary">
                 ₦{order.price.toLocaleString()}
               </p>
               {order.zonePrice && (
-                <p className="text-lg text-white mt-2">
+                <p className="text-base sm:text-lg text-white mt-2">
                   Includes delivery fee: ₦{order.zonePrice.toLocaleString()}
                 </p>
               )}
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white mb-2">Estimated Delivery</h3>
-              <p className="text-xl text-gold-primary font-medium">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-2">Estimated Delivery</h3>
+              <p className="text-lg sm:text-xl text-gold-primary font-medium">
                 {new Date(order.estimatedDeliveryDate).toLocaleDateString()}
               </p>
             </div>
           </div>
 
-          <div className="border-b-2 border-gray-700 pb-8">
-            <h2 className="text-xl font-bold text-white mb-6">Delivery Details</h2>
-            <div className="grid gap-6 bg-gray-800 p-6 rounded-lg">
+          <div className="border-b-2 border-gray-700 pb-6 sm:pb-8">
+            <h2 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Delivery Details</h2>
+            <div className="grid gap-4 sm:gap-6 bg-gray-800 p-4 sm:p-6 rounded-lg">
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-white mb-1">Recipient</span>
-                <span className="text-xl text-gold-primary">
+                <span className="text-base sm:text-lg font-bold text-white mb-1">Recipient</span>
+                <span className="text-lg sm:text-xl text-gold-primary">
                   {order.deliveryAddress.manualAddress?.recipientName || order.deliveryAddress.recipientName}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-white mb-1">Address</span>
-                <span className="text-xl text-gold-primary">
+                <span className="text-base sm:text-lg font-bold text-white mb-1">Address</span>
+                <span className="text-lg sm:text-xl text-gold-primary">
                   {order.deliveryAddress.manualAddress?.street || order.deliveryAddress.street},{" "}
                   {order.deliveryAddress.manualAddress?.city || order.deliveryAddress.city}
                 </span>
               </div>
               <div className="flex flex-col">
-                <span className="text-lg font-bold text-white mb-1">Phone</span>
-                <span className="text-xl text-gold-primary">
+                <span className="text-base sm:text-lg font-bold text-white mb-1">Phone</span>
+                <span className="text-lg sm:text-xl text-gold-primary">
                   {order.deliveryAddress.manualAddress?.recipientPhone || order.deliveryAddress.recipientPhone}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="border-b-2 border-gray-700 pb-8">
-            <h2 className="text-xl font-bold text-white mb-6">Items</h2>
+          <div className="border-b-2 border-gray-700 pb-6 sm:pb-8">
+            <h2 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Items</h2>
             <div className="space-y-4">
               {order.items.map((item) => (
-                <div key={item._id} className="flex justify-between items-start bg-gray-800 p-6 rounded-lg">
-                  <div className="space-y-3">
-                    <p className="text-lg text-white">
+                <div key={item._id} className="flex flex-col sm:flex-row sm:justify-between sm:items-start bg-gray-800 p-4 sm:p-6 rounded-lg">
+                  <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-0">
+                    <p className="text-base sm:text-lg text-white">
                       <span className="font-bold">Product ID:</span> {item.productId}
                     </p>
-                    <p className="text-lg text-white">
+                    <p className="text-base sm:text-lg text-white">
                       <span className="font-bold">Quantity:</span> {item.quantity}
                     </p>
                     {item.variantData && item.variantData.length > 0 && (
-                      <div className="text-lg text-white">
+                      <div className="text-base sm:text-lg text-white">
                         {item.variantData.map((variant) => (
                           <p key={variant._id}>
                             <span className="font-bold">{variant.name}:</span> {variant.value}
@@ -173,7 +173,7 @@ export default function OrderDetails({ orderId }: { orderId: string }) {
                       </div>
                     )}
                   </div>
-                  <p className="text-2xl font-bold text-gold-primary">
+                  <p className="text-xl sm:text-2xl font-bold text-gold-primary">
                     ₦{item.price.toLocaleString()}
                   </p>
                 </div>
@@ -183,9 +183,9 @@ export default function OrderDetails({ orderId }: { orderId: string }) {
 
           {order.specialInstructions && (
             <div>
-              <h2 className="text-xl font-bold text-white mb-4">Special Instructions</h2>
-              <div className="bg-gray-800 p-6 rounded-lg">
-                <p className="text-lg text-white">
+              <h2 className="text-lg sm:text-xl font-bold text-white mb-4">Special Instructions</h2>
+              <div className="bg-gray-800 p-4 sm:p-6 rounded-lg">
+                <p className="text-base sm:text-lg text-white">
                   {order.specialInstructions}
                 </p>
               </div>
