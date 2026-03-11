@@ -2,7 +2,7 @@ import { Cart, CartResponse, AddToCartData, UpdateCartItemData } from "./types";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://logistics-backend-1-s91j.onrender.com";
+  "https://logistics-backend-yspl.onrender.com";
 
 // Helper to safely access localStorage (only in browser)
 const getToken = () => {
@@ -71,7 +71,7 @@ export async function addToCart(cartData: AddToCartData): Promise<Cart> {
 
 export async function updateCartItem(
   itemId: string,
-  updateData: UpdateCartItemData
+  updateData: UpdateCartItemData,
 ): Promise<Cart> {
   try {
     const response = await fetch(`${API_URL}/api/cart/items/${itemId}`, {

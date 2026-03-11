@@ -18,7 +18,7 @@ interface GroupedItems {
 export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
   console.log(
     "CheckoutForm rendered with cart:",
-    JSON.stringify(cart, null, 2)
+    JSON.stringify(cart, null, 2),
   );
   console.log("Available zones:", zones);
 
@@ -26,7 +26,7 @@ export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedZone, setSelectedZone] = useState<Zone | null>(
-    zones[0] || null
+    zones[0] || null,
   );
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
       const formData = new FormData(e.currentTarget);
       console.log(
         "Form data collected:",
-        Object.fromEntries(formData.entries())
+        Object.fromEntries(formData.entries()),
       );
 
       // Create a single consolidated order
@@ -89,13 +89,13 @@ export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
 
       console.log(
         "Sending consolidated order:",
-        JSON.stringify(orderData, null, 2)
+        JSON.stringify(orderData, null, 2),
       );
 
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_API_URL ||
-          "https://logistics-backend-1-s91j.onrender.com"
+          "https://logistics-backend-yspl.onrender.com"
         }/api/cart/checkout`,
         {
           method: "POST",
@@ -104,7 +104,7 @@ export default function CheckoutForm({ cart, zones }: CheckoutFormProps) {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(orderData),
-        }
+        },
       );
 
       const text = await response.text();

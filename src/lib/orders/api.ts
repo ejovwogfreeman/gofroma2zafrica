@@ -2,7 +2,7 @@ import { Order, CreateOrderData } from "./types";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://logistics-backend-1-s91j.onrender.com";
+  "https://logistics-backend-yspl.onrender.com";
 
 // Helper to safely access localStorage (only in browser)
 const getToken = () => {
@@ -75,7 +75,7 @@ interface OrdersQueryParams {
 }
 
 export async function getOrders(
-  params: OrdersQueryParams = {}
+  params: OrdersQueryParams = {},
 ): Promise<PaginatedResponse<Order>> {
   const token = getToken();
 
@@ -131,7 +131,7 @@ export async function getOrderById(orderId: string): Promise<Order> {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         cache: "no-store",
-      }
+      },
     );
 
     console.log("Response status:", response.status);
@@ -163,7 +163,7 @@ export async function trackOrder(trackingNumber: string): Promise<Order> {
           "Content-Type": "application/json",
         },
         cache: "no-store",
-      }
+      },
     );
 
     const data = await response.json();
@@ -179,7 +179,7 @@ export async function trackOrder(trackingNumber: string): Promise<Order> {
 
 export async function confirmOrderPayment(
   orderId: string,
-  amount: number
+  amount: number,
 ): Promise<Order> {
   const token = getToken();
 
@@ -206,7 +206,7 @@ export async function confirmOrderPayment(
           paymentMethod: "BANK_TRANSFER",
           amount: amount,
         }),
-      }
+      },
     );
 
     if (!response.ok) {

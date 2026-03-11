@@ -24,7 +24,7 @@ import {
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  "https://logistics-backend-1-s91j.onrender.com";
+  "https://logistics-backend-yspl.onrender.com";
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000; // 1 second
 
@@ -50,7 +50,7 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 export async function fetchWithRetry(
   url: string,
   options: RequestInit,
-  retries = MAX_RETRIES
+  retries = MAX_RETRIES,
 ): Promise<Response> {
   try {
     const response = await fetch(url, options);
@@ -67,7 +67,7 @@ export async function fetchWithRetry(
 
 // Get all stores with optional filters
 export async function getStores(
-  filters: StoreFilters = {}
+  filters: StoreFilters = {},
 ): Promise<PaginatedStores> {
   const queryParams = new URLSearchParams();
 
@@ -83,7 +83,7 @@ export async function getStores(
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   return handleResponse<PaginatedStores>(response);
@@ -126,7 +126,7 @@ export async function getStoreBySlug(slug: string): Promise<Store> {
 // Get store products
 export async function getStoreProducts(
   storeSlug: string,
-  filters: ProductFilters = {}
+  filters: ProductFilters = {},
 ): Promise<PaginatedProducts> {
   const queryParams = new URLSearchParams();
 
@@ -142,7 +142,7 @@ export async function getStoreProducts(
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   const data = await response.json();
@@ -167,7 +167,7 @@ export async function getStoreProducts(
 }
 
 export async function rateStore(
-  ratingData: CreateStoreRatingData
+  ratingData: CreateStoreRatingData,
 ): Promise<StoreRating> {
   const token = localStorage.getItem("token");
   const response = await fetch(`${API_URL}/api/consumers/rate-store`, {
@@ -187,7 +187,7 @@ export async function rateStore(
 
 export async function getStoreOrders(
   page: number = 1,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<PaginatedStoreOrders> {
   const token = localStorage.getItem("token");
 
@@ -204,7 +204,7 @@ export async function getStoreOrders(
           "Content-Type": "application/json",
         },
         cache: "no-store",
-      }
+      },
     );
 
     const data = await response.json();
@@ -236,7 +236,7 @@ export async function getStoreOrderById(orderId: string): Promise<StoreOrder> {
           "Content-Type": "application/json",
         },
         cache: "no-store",
-      }
+      },
     );
 
     // Check if response exists before trying to parse JSON
@@ -255,7 +255,7 @@ export async function getStoreOrderById(orderId: string): Promise<StoreOrder> {
       });
       throw new Error(
         data.message ||
-          `Failed to fetch order details (Status: ${response.status})`
+          `Failed to fetch order details (Status: ${response.status})`,
       );
     }
 
@@ -277,7 +277,7 @@ export async function getStoreOrderById(orderId: string): Promise<StoreOrder> {
     // Provide more specific error messages
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       throw new Error(
-        "Network error: Unable to connect to the server. Please check your internet connection."
+        "Network error: Unable to connect to the server. Please check your internet connection.",
       );
     }
 
@@ -301,7 +301,7 @@ export async function markOrderAsReady(orderId: string): Promise<StoreOrder> {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!response) {
@@ -318,7 +318,7 @@ export async function markOrderAsReady(orderId: string): Promise<StoreOrder> {
       });
       throw new Error(
         data.message ||
-          `Failed to mark order as ready (Status: ${response.status})`
+          `Failed to mark order as ready (Status: ${response.status})`,
       );
     }
 
@@ -333,7 +333,7 @@ export async function markOrderAsReady(orderId: string): Promise<StoreOrder> {
 
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       throw new Error(
-        "Network error: Unable to connect to the server. Please check your internet connection."
+        "Network error: Unable to connect to the server. Please check your internet connection.",
       );
     }
 
@@ -382,34 +382,34 @@ export async function getStoreDashboard(): Promise<StoreDashboardData> {
           totalRevenue: Number(
             data.data.stats.revenue.breakdown.daily.reduce(
               (sum: number, d: { amount: number }) => sum + d.amount,
-              0
-            )
+              0,
+            ),
           ),
           // updated
           today: Number(
             data.data.stats.revenue.breakdown.daily
               .filter(
                 (d: { date: string; amount: number }) =>
-                  d.date === new Date().toISOString().split("T")[0]
+                  d.date === new Date().toISOString().split("T")[0],
               )
               .reduce(
                 (sum: number, d: { date: string; amount: number }) =>
                   sum + d.amount,
-                0
-              )
+                0,
+              ),
           ),
           yesterday: Number(
             data.data.stats.revenue.breakdown.daily
               .filter(
                 (d: { date: string; amount: number }) =>
                   d.date ===
-                  new Date(Date.now() - 86400000).toISOString().split("T")[0]
+                  new Date(Date.now() - 86400000).toISOString().split("T")[0],
               )
               .reduce(
                 (sum: number, d: { date: string; amount: number }) =>
                   sum + d.amount,
-                0
-              )
+                0,
+              ),
           ),
           // thisWeek: Number(
           //   data.data.stats.revenue.breakdown.daily
@@ -440,8 +440,8 @@ export async function getStoreDashboard(): Promise<StoreDashboardData> {
               .reduce(
                 (sum: number, d: { date: string; amount: number }) =>
                   sum + d.amount,
-                0
-              )
+                0,
+              ),
           ),
           previousMonth: Number(
             data.data.stats.revenue.breakdown.daily
@@ -465,8 +465,8 @@ export async function getStoreDashboard(): Promise<StoreDashboardData> {
               .reduce(
                 (sum: number, d: { date: string; amount: number }) =>
                   sum + d.amount,
-                0
-              )
+                0,
+              ),
           ),
         },
       },
@@ -481,7 +481,7 @@ export async function getStoreDashboard(): Promise<StoreDashboardData> {
 
 export async function getStoreCustomers(
   page: number = 1,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<PaginatedStoreCustomers> {
   const token = localStorage.getItem("token");
 
@@ -498,7 +498,7 @@ export async function getStoreCustomers(
           "Content-Type": "application/json",
         },
         cache: "no-store",
-      }
+      },
     );
 
     if (!response) {
@@ -524,7 +524,7 @@ export async function getStoreCustomers(
 }
 
 export async function createStoreAddress(
-  addressData: CreateStoreAddressData
+  addressData: CreateStoreAddressData,
 ): Promise<StoreAddress> {
   const token = localStorage.getItem("token");
 
@@ -565,7 +565,7 @@ export async function createStoreAddress(
 }
 
 export async function updateStoreAddress(
-  addressData: UpdateStoreAddressData
+  addressData: UpdateStoreAddressData,
 ): Promise<StoreAddress> {
   const token = localStorage.getItem("token");
 
@@ -583,7 +583,7 @@ export async function updateStoreAddress(
           "Content-Type": "application/json",
         },
         body: JSON.stringify(addressData),
-      }
+      },
     );
 
     if (!response) {
@@ -651,7 +651,7 @@ export async function getAddressById(addressId: string): Promise<Address> {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
@@ -668,7 +668,7 @@ export async function getAddressById(addressId: string): Promise<Address> {
 }
 
 export async function createAddress(
-  addressData: CreateAddressData
+  addressData: CreateAddressData,
 ): Promise<Address> {
   const token = localStorage.getItem("token");
 
@@ -700,7 +700,7 @@ export async function createAddress(
 }
 
 export async function updateAddress(
-  addressData: UpdateAddressData
+  addressData: UpdateAddressData,
 ): Promise<Address> {
   const token = localStorage.getItem("token");
 
@@ -718,7 +718,7 @@ export async function updateAddress(
           "Content-Type": "application/json",
         },
         body: JSON.stringify(addressData),
-      }
+      },
     );
 
     const data = await response.json();
@@ -750,7 +750,7 @@ export async function deleteAddress(addressId: string): Promise<void> {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
@@ -765,7 +765,7 @@ export async function deleteAddress(addressId: string): Promise<void> {
 }
 
 export async function uploadStoreImage(
-  imageFile: File
+  imageFile: File,
 ): Promise<StoreImageUploadResponse> {
   const token = localStorage.getItem("token");
 
@@ -800,7 +800,7 @@ export async function uploadStoreImage(
 
 export async function updateStore(
   storeId: string,
-  updateData: UpdateStoreData
+  updateData: UpdateStoreData,
 ): Promise<Store> {
   const token = localStorage.getItem("token");
 
@@ -874,7 +874,7 @@ export async function getPaymentDetails(): Promise<StorePaymentDetails> {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
@@ -891,7 +891,7 @@ export async function getPaymentDetails(): Promise<StorePaymentDetails> {
 }
 
 export async function createPaymentDetails(
-  paymentDetails: StorePaymentDetails
+  paymentDetails: StorePaymentDetails,
 ): Promise<StorePaymentDetails> {
   const token = localStorage.getItem("token");
 
@@ -923,7 +923,7 @@ export async function createPaymentDetails(
 }
 
 export async function updatePaymentDetails(
-  updateData: UpdatePaymentDetailsData
+  updateData: UpdatePaymentDetailsData,
 ): Promise<StorePaymentDetails> {
   const token = localStorage.getItem("token");
 
@@ -970,7 +970,7 @@ export async function openMyStore(): Promise<Store> {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
@@ -1001,7 +1001,7 @@ export async function closeMyStore(): Promise<Store> {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const data = await response.json();
