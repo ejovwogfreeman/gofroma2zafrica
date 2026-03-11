@@ -24,6 +24,7 @@ export default function Home() {
           </Link>
         </div>
       </div>
+
       <AboutUs />
       <CTASection />
     </main>
